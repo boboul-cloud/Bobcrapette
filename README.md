@@ -58,6 +58,23 @@ xcodebuild test -scheme Crapette -destination 'platform=macOS'
 En `DEBUG`, l'argument de lancement `-startGame` ouvre directement une partie, ce qui
 évite de passer par le menu quand on inspecte le tapis.
 
+## Signature
+
+Le projet est en **signature automatique** sur l'équipe `38DQ8FW23J`
+(« robert Oulhen »), avec le certificat *Apple Development* déjà présent dans le
+trousseau. Il n'y a rien à configurer : simulateur, Mac et appareil réel sont
+signés et se lancent directement.
+
+Pour construire en ligne de commande vers un iPhone ou un iPad branché, ajouter
+le drapeau qui autorise Xcode à mettre le profil à jour :
+
+```sh
+xcodebuild build -scheme Crapette -destination 'generic/platform=iOS' -allowProvisioningUpdates
+```
+
+Pour signer avec un autre compte, remplacer `DEVELOPMENT_TEAM` dans
+`project.yml` puis relancer `xcodegen generate`.
+
 ## Organisation
 
 | Dossier | Contenu |
