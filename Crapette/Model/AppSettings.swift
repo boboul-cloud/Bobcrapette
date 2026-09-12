@@ -31,12 +31,12 @@ final class AppSettings {
         let d = defaults
         variantPreset = VariantPreset(rawValue: d.string(forKey: "variant") ?? "") ?? .tarot77
         difficulty = Difficulty(rawValue: d.string(forKey: "difficulty") ?? "") ?? .normal
-        assistEnabled = d.object(forKey: "assist") as? Bool ?? true
-        allowUndo = d.object(forKey: "undo") as? Bool ?? true
-        crapetteSize = d.object(forKey: "crapetteSize") as? Int ?? 13
-        animationSpeed = d.object(forKey: "animationSpeed") as? Double ?? 1.0
-        hapticsEnabled = d.object(forKey: "haptics") as? Bool ?? true
-        humanStarts = d.object(forKey: "humanStarts") as? Bool ?? true
+        assistEnabled = Self.flag(d, "assist", or: true)
+        allowUndo = Self.flag(d, "undo", or: true)
+        crapetteSize = Self.number(d, "crapetteSize", or: 13)
+        animationSpeed = Self.decimal(d, "animationSpeed", or: 1.0)
+        hapticsEnabled = Self.flag(d, "haptics", or: true)
+        humanStarts = Self.flag(d, "humanStarts", or: true)
         gamesPlayed = d.integer(forKey: "gamesPlayed")
         gamesWon = d.integer(forKey: "gamesWon")
     }
@@ -56,6 +56,20 @@ final class AppSettings {
     func resetStatistics() {
         gamesPlayed = 0
         gamesWon = 0
+    }
+
+    /// Lectures tolérantes : une valeur absente rend la valeur par défaut,
+    /// et une valeur venue de la ligne de commande est convertie correctement.
+    private static func flag(_ d: UserDefaults, _ key: String, or fallback: Bool) -> Bool {
+        d.object(forKey: key) == nil ? fallback : d.bool(forKey: key)
+    }
+
+    private static func number(_ d: UserDefaults, _ key: String, or fallback: Int) -> Int {
+        d.object(forKey: key) == nil ? fallback : d.integer(forKey: key)
+    }
+
+    private static func decimal(_ d: UserDefaults, _ key: String, or fallback: Double) -> Double {
+        d.object(forKey: key) == nil ? fallback : d.double(forKey: key)
     }
 
     private func store(_ value: Any, _ key: String) {

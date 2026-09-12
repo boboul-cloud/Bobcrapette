@@ -82,11 +82,15 @@ final class GameStore {
     /// Tenu à jour plutôt que relu du disque : l'affichage le consulte souvent.
     private(set) var savedGameAvailable: Bool = GameArchive.load() != nil
 
-    func startNewGame() {
+    /// `seed` rejoue exactement la même donne : utile pour reproduire une
+    /// partie, et indispensable aux tests d'interface.
+    func startNewGame(seed: UInt64? = nil) {
         cancelEverything()
         let variant = settings.variant
         let first: Side = settings.humanStarts ? .south : .north
-        state = GameState.undealt(variant: variant, seed: UInt64.random(in: 1...UInt64.max), firstPlayer: first)
+        state = GameState.undealt(variant: variant,
+                                  seed: seed ?? UInt64.random(in: 1...UInt64.max),
+                                  firstPlayer: first)
         opponent = AIPlayer(side: .north, difficulty: settings.difficulty)
         undoStack.removeAll()
         selection = nil

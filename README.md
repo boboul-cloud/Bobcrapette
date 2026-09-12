@@ -51,12 +51,17 @@ xcodebuild build -scheme Crapette -destination 'platform=macOS'
 # iPhone / iPad
 xcodebuild build -scheme Crapette -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)'
 
-# La suite de tests
+# Les tests du moteur et de la conduite de partie
 xcodebuild test -scheme Crapette -destination 'platform=macOS'
+
+# Les tests d'interface : ils tapent et glissent vraiment sur le simulateur
+xcodebuild test -scheme CrapetteUI -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
 
-En `DEBUG`, l'argument de lancement `-startGame` ouvre directement une partie, ce qui
-évite de passer par le menu quand on inspecte le tapis.
+En `DEBUG`, deux arguments de lancement aident à la mise au point :
+`-startGame` ouvre directement une partie sans passer par le menu, et
+`-seed 74` rejoue une donne connue. Les tests d'interface s'en servent pour
+travailler sur un tapis parfaitement reproductible.
 
 ## Signature
 
@@ -82,6 +87,7 @@ Pour signer avec un autre compte, remplacer `DEVELOPMENT_TEAM` dans
 | `Crapette/Model` | Le jeu, sans une ligne d'interface : cartes, variantes, position, **moteur de règles**, adversaire artificiel, conduite de la partie, sauvegarde. |
 | `Crapette/Views` | Le rendu : cartes dessinées en vectoriel, plan du tapis, plateau, écrans de menu, de réglages et de règles. |
 | `CrapetteTests` | 45 tests : composition du jeu, fondations, colonnes, coups offensifs, obligations, déroulement d'un tour, adversaire, conduite de partie et plan du tapis. |
+| `CrapetteUITests` | 6 tests d'interface sur simulateur : tape pour choisir, tape pour jouer, glisser-déposer, avertissement de coup obligatoire. |
 | `Tools/MakeIcon.swift` | Génère l'icône de l'application en CoreGraphics. |
 
 Quelques partis pris :
@@ -91,8 +97,12 @@ Quelques partis pris :
 - **Le plan du tapis est calculé en « largeurs de carte »**, puis mis à l'échelle. Trois
   pliages existent (paysage, carré, portrait) et l'application retient celui qui donne
   les plus grandes cartes sur l'écran courant.
-- **Les cartes sont posées en coordonnées absolues.** Quand la position change, SwiftUI
-  interpole : distribution et coups s'animent sans code d'animation par carte.
+- **Les cartes sont posées en coordonnées absolues** avec `position`, qui place
+  réellement la vue : le cadre suit le dessin, donc les touches et l'accessibilité
+  aussi. Quand la position change, SwiftUI interpole : distribution et coups
+  s'animent sans code d'animation par carte.
+- **Une carte, un seul geste.** Tape et glissement sortent du même reconnaisseur,
+  mesuré dans le repère fixe du tapis, jamais dans celui de la carte qui bouge.
 - **Le moteur de règles est pur et sans état**, donc directement réutilisable par l'IA
   et testable sans interface.
 

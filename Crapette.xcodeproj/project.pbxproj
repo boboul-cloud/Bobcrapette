@@ -17,6 +17,7 @@
 		25A786A6DA9B883D77895249 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473D5ADCE8ACFAEFE98965 /* Rules.swift */; };
 		44E2BB1197CB9E87A25F1A44 /* BoardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5671740418D94D4763D39EF /* BoardLayout.swift */; };
 		485F78741838DAA62AF6D4F5 /* CrapetteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2B289D8BF23FA5AD22B3F /* CrapetteApp.swift */; };
+		5642EA024A400A0F681F3B03 /* BoardInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B39D96D2C313990914BABFB /* BoardInteractionTests.swift */; };
 		723163C9F3CCAD6310D18AB8 /* RulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748CAA43E6DA63B43816D7A /* RulesTests.swift */; };
 		82BDAB1BA084529EB9114BDA /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CD78E9D4F9EA768BD5A48 /* AIPlayer.swift */; };
 		922A52A94DC451236B4EDFF5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC9CD62573002D00B8DE27 /* MenuView.swift */; };
@@ -41,13 +42,22 @@
 			remoteGlobalIDString = 0784BD821D68652C06F1349E;
 			remoteInfo = Crapette;
 		};
+		FBD1A145B35480164EF15AAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E264EF2E98618BA32DCAF12 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0784BD821D68652C06F1349E;
+			remoteInfo = Crapette;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0748CAA43E6DA63B43816D7A /* RulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTests.swift; sourceTree = "<group>"; };
+		09353058B2F456C268FAB9D2 /* CrapetteUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CrapetteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C1947E287AB348456A9C93D /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		23448E1B39C8739864F0D256 /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		2D8CD81C66C0592503601788 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		4B39D96D2C313990914BABFB /* BoardInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInteractionTests.swift; sourceTree = "<group>"; };
 		4DB2B289D8BF23FA5AD22B3F /* CrapetteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrapetteApp.swift; sourceTree = "<group>"; };
 		54AC9CD62573002D00B8DE27 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		59579263FD0B8C4FEF7CE271 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -87,8 +97,17 @@
 			children = (
 				7CC0C486F58C13D106EE09CA /* Crapette */,
 				6724D7DAA2FEC54124449FAD /* CrapetteTests */,
+				38B421A13C63296CB0935A01 /* CrapetteUITests */,
 				4FE244903FA16C441BA2EBD1 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		38B421A13C63296CB0935A01 /* CrapetteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4B39D96D2C313990914BABFB /* BoardInteractionTests.swift */,
+			);
+			path = CrapetteUITests;
 			sourceTree = "<group>";
 		};
 		4FE244903FA16C441BA2EBD1 /* Products */ = {
@@ -96,6 +115,7 @@
 			children = (
 				6E5F99BDCCDDEF23E8855286 /* Crapette.app */,
 				E49B8A9D5BA4ADDD8DD847BC /* CrapetteTests.xctest */,
+				09353058B2F456C268FAB9D2 /* CrapetteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +220,24 @@
 			productReference = E49B8A9D5BA4ADDD8DD847BC /* CrapetteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F40BE89954A40FC4D2A21895 /* CrapetteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99CBCF26A9A15F0BEF62FDE3 /* Build configuration list for PBXNativeTarget "CrapetteUITests" */;
+			buildPhases = (
+				2D60C8BAC7B2282E74AF6FB4 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1FF2ADA2DCA73ACB08F9DABE /* PBXTargetDependency */,
+			);
+			name = CrapetteUITests;
+			packageProductDependencies = (
+			);
+			productName = CrapetteUITests;
+			productReference = 09353058B2F456C268FAB9D2 /* CrapetteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -216,6 +254,11 @@
 					E87FAD1275549D76EE89023D = {
 						DevelopmentTeam = 38DQ8FW23J;
 						ProvisioningStyle = Automatic;
+					};
+					F40BE89954A40FC4D2A21895 = {
+						DevelopmentTeam = 38DQ8FW23J;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0784BD821D68652C06F1349E;
 					};
 				};
 			};
@@ -235,6 +278,7 @@
 			targets = (
 				0784BD821D68652C06F1349E /* Crapette */,
 				E87FAD1275549D76EE89023D /* CrapetteTests */,
+				F40BE89954A40FC4D2A21895 /* CrapetteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +295,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D60C8BAC7B2282E74AF6FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5642EA024A400A0F681F3B03 /* BoardInteractionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AC58282D70EFA2D6632B9870 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +343,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1FF2ADA2DCA73ACB08F9DABE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0784BD821D68652C06F1349E /* Crapette */;
+			targetProxy = FBD1A145B35480164EF15AAE /* PBXContainerItemProxy */;
+		};
 		FFE871E110E669E3844D25C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0784BD821D68652C06F1349E /* Crapette */;
@@ -454,6 +511,48 @@
 			};
 			name = Debug;
 		};
+		660507FFA31AE6CE8A11A50D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette.uitests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Crapette;
+			};
+			name = Debug;
+		};
+		93610947EF8D789B728F3BEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette.uitests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Crapette;
+			};
+			name = Release;
+		};
 		F217B273AA5ADB5DB4D3FAE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -571,6 +670,15 @@
 			buildConfigurations = (
 				FCFA3F21FCE5FFBA986A25E4 /* Debug */,
 				1063A498683C37348CF6A9A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		99CBCF26A9A15F0BEF62FDE3 /* Build configuration list for PBXNativeTarget "CrapetteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				660507FFA31AE6CE8A11A50D /* Debug */,
+				93610947EF8D789B728F3BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

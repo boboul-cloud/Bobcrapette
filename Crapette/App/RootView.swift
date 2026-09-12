@@ -20,9 +20,14 @@ struct RootView: View {
         .animation(.easeInOut(duration: 0.32), value: store.phase)
         .onAppear {
             #if DEBUG
-            // Permet d'ouvrir directement une partie pour inspecter le tapis.
-            if ProcessInfo.processInfo.arguments.contains("-startGame") {
-                store.startNewGame()
+            // Ouvre directement une partie, éventuellement sur une donne
+            // reproductible : « -startGame -seed 1234 ».
+            let arguments = ProcessInfo.processInfo.arguments
+            if arguments.contains("-startGame") {
+                let seed = arguments.firstIndex(of: "-seed").flatMap { index -> UInt64? in
+                    arguments.indices.contains(index + 1) ? UInt64(arguments[index + 1]) : nil
+                }
+                store.startNewGame(seed: seed)
             }
             #endif
         }

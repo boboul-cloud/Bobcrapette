@@ -3,10 +3,20 @@ import SwiftUI
 /// Le tapis. Toutes les cartes visibles sont placées en coordonnées absolues :
 /// quand l'état change, SwiftUI interpole les positions, ce qui suffit à
 /// animer les coups et la distribution sans aucun code d'animation par carte.
+///
+/// Le placement se fait avec `position`, qui pose réellement la vue dans le
+/// repère du parent. `offset` ne déplacerait que le dessin : le cadre de la
+/// vue resterait au point de départ, et ni les touches ni l'accessibilité ne
+/// suivraient la carte là où le joueur la voit.
 struct BoardView: View {
     @Environment(GameStore.self) private var store
 
     @State private var drag: DragInfo?
+
+    /// Repère fixe du tapis. Le glissement doit s'y mesurer : dans le repère
+    /// de la carte, qui suit le doigt, le déplacement se replierait sur
+    /// lui-même et la carte ne bougerait jamais vraiment.
+    private static let boardSpace = "crapette.tapis"
 
     struct DragInfo: Equatable {
         var source: MoveSource
@@ -23,6 +33,14 @@ struct BoardView: View {
             let scale = layout.scale(in: geometry.size)
 
             ZStack(alignment: .topLeading) {
+                // Cale le ZStack sur la taille du tapis. Les décalages ne
+                // comptent pas dans la mise en page : sans cette cale, le
+                // ZStack ne mesure qu'une carte et les autres tombent hors
+                // de ses limites, où elles ne reçoivent plus les gestes.
+                Color.clear
+                    .frame(width: layout.boardSize.width * scale,
+                           height: layout.boardSize.height * scale)
+                    .allowsHitTesting(false)
                 slotsLayer(layout, scale)
                 cardsLayer(layout, scale)
                 labelsLayer(layout, scale)
@@ -32,6 +50,7 @@ struct BoardView: View {
             .frame(width: layout.boardSize.width * scale,
                    height: layout.boardSize.height * scale,
                    alignment: .topLeading)
+            .coordinateSpace(.named(Self.boardSpace))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .animation(animation, value: store.state)
         }
@@ -48,9 +67,11 @@ struct BoardView: View {
                 isTarget: store.highlightedTargets.contains(pile),
                 width: scale
             )
-            .offset(x: frame.minX * scale, y: frame.minY * scale)
             .contentShape(Rectangle())
+            .accessibilityIdentifier("slot-\(Self.identifier(for: pile))")
+            .accessibilityAddTraits(.isButton)
             .onTapGesture { store.tap(pile) }
+            .position(x: frame.midX * scale, y: frame.midY * scale)
             .zIndex(0)
         }
     }
@@ -77,13 +98,31 @@ struct BoardView: View {
                 width: scale,
                 emphasis: emphasis(for: placed)
             )
-            .offset(x: placed.frame.minX * scale, y: placed.frame.minY * scale)
-            .offset(dragging ? drag?.translation ?? .zero : .zero)
-            .scaleEffect(dragging ? 1.06 : 1)
-            .zIndex(dragging ? 10_000 : placed.zIndex)
             .contentShape(Rectangle())
-            .onTapGesture { store.tap(placed.pile) }
-            .gesture(dragGesture(placed, layout: layout, scale: scale))
+            .accessibilityIdentifier(placed.isTop ? "top-\(Self.identifier(for: placed.pile))" : "")
+            .accessibilityAddTraits(isSelected(placed) ? [.isSelected, .isButton] : .isButton)
+            .gesture(cardGesture(placed, layout: layout, scale: scale))
+            .scaleEffect(dragging ? 1.06 : 1)
+            .position(
+                x: placed.frame.midX * scale + (dragging ? drag?.translation.width ?? 0 : 0),
+                y: placed.frame.midY * scale + (dragging ? drag?.translation.height ?? 0 : 0)
+            )
+            .zIndex(dragging ? 10_000 : placed.zIndex)
+        }
+    }
+
+    private func isSelected(_ placed: PlacedCard) -> Bool {
+        placed.isTop && store.selection?.pile == placed.pile && store.canHumanAct
+    }
+
+    /// Identifiant stable d'un paquet, pour l'accessibilité et les tests.
+    static func identifier(for pile: PileRef) -> String {
+        switch pile {
+        case .stock(let side): "stock-\(side == .south ? "south" : "north")"
+        case .waste(let side): "waste-\(side == .south ? "south" : "north")"
+        case .crapette(let side): "crapette-\(side == .south ? "south" : "north")"
+        case .tableau(let index): "tableau-\(index)"
+        case .foundation(let index): "foundation-\(index)"
         }
     }
 
@@ -92,11 +131,16 @@ struct BoardView: View {
         return drag.source.pile == placed.pile
     }
 
-    private func dragGesture(_ placed: PlacedCard, layout: BoardLayout, scale: CGFloat) -> some Gesture {
-        DragGesture(minimumDistance: 6)
+    /// Tape et glissement dans un seul geste : au-delà d'un seuil le doigt
+    /// emmène la carte, en deçà le relâchement vaut une tape. Deux
+    /// reconnaisseurs séparés se disputeraient le toucher.
+    private func cardGesture(_ placed: PlacedCard, layout: BoardLayout, scale: CGFloat) -> some Gesture {
+        DragGesture(minimumDistance: 0, coordinateSpace: .named(Self.boardSpace))
             .onChanged { value in
                 guard placed.isDraggable, let source = placed.source else { return }
                 if drag == nil {
+                    guard hypot(value.translation.width, value.translation.height) > scale * 0.10
+                    else { return }
                     drag = DragInfo(source: source, translation: value.translation)
                     store.selection = source
                 } else {
@@ -104,18 +148,27 @@ struct BoardView: View {
                 }
             }
             .onEnded { value in
-                guard let info = drag else { return }
+                let travelled = hypot(value.translation.width, value.translation.height)
+                let source = drag?.source ?? placed.source
+
+                // Doigt resté sur place : c'est une tape.
+                guard travelled > scale * 0.16, placed.isDraggable, let source else {
+                    withAnimation(animation) { drag = nil }
+                    if travelled <= scale * 0.16 { store.tap(placed.pile) }
+                    return
+                }
+
                 // Le point de chute, ramené aux coordonnées du plan.
                 let dropped = CGPoint(
-                    x: (placed.frame.midX * scale + value.translation.width) / scale,
-                    y: (placed.frame.midY * scale + value.translation.height) / scale
+                    x: placed.frame.midX + value.translation.width / scale,
+                    y: placed.frame.midY + value.translation.height / scale
                 )
                 let target = layout.dropTargets(for: store.state)
                     .first { $0.area.contains(dropped) }?.pile
 
                 withAnimation(animation) {
                     if let target {
-                        store.drop(from: info.source, onto: target)
+                        store.drop(from: source, onto: target)
                     } else {
                         store.selection = nil
                     }
@@ -142,12 +195,12 @@ struct BoardView: View {
             let above = isNorth(pile)
             PileCaption(title: caption(for: pile), count: store.state.cards(in: pile).count, width: scale)
                 .frame(width: scale * 1.6)
-                .offset(
-                    x: (frame.midX - 0.8) * scale,
-                    y: above ? (frame.minY * scale - scale * 0.34)
-                             : (frame.maxY * scale + scale * 0.06)
-                )
                 .allowsHitTesting(false)
+                .position(
+                    x: frame.midX * scale,
+                    y: above ? (frame.minY * scale - scale * 0.20)
+                             : (frame.maxY * scale + scale * 0.20)
+                )
                 .zIndex(9_000)
         }
     }
@@ -270,6 +323,7 @@ private struct SlotView: View {
             }
         }
         .frame(width: width, height: height)
+        .accessibilityElement(children: .ignore)
     }
 
     @ViewBuilder
