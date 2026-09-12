@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04D147F0F3A2CAB2D8F66161 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59579263FD0B8C4FEF7CE271 /* BoardView.swift */; };
+		072E03FEF5A59B7A1B706446 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF064A351E28A206BA12D01 /* GameState.swift */; };
+		085A2534FC3DC8757C19FD5C /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23448E1B39C8739864F0D256 /* RulesView.swift */; };
+		09E496B032D742EE801AA75F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DBBD0E84A339A2DD965B4 /* Card.swift */; };
+		11024EEA5FBC06ED5B7E8F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC082881EBA5496211A58A44 /* Assets.xcassets */; };
+		16EA1B60C8D1AC7F9752F6BA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563CFE7265338BB9E7DA358 /* RootView.swift */; };
+		23AE8A62BD6ED38CF2046F9C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D96D14AF57E0ED51586E595 /* Persistence.swift */; };
+		25A786A6DA9B883D77895249 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473D5ADCE8ACFAEFE98965 /* Rules.swift */; };
+		44E2BB1197CB9E87A25F1A44 /* BoardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5671740418D94D4763D39EF /* BoardLayout.swift */; };
+		485F78741838DAA62AF6D4F5 /* CrapetteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2B289D8BF23FA5AD22B3F /* CrapetteApp.swift */; };
+		723163C9F3CCAD6310D18AB8 /* RulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748CAA43E6DA63B43816D7A /* RulesTests.swift */; };
+		82BDAB1BA084529EB9114BDA /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CD78E9D4F9EA768BD5A48 /* AIPlayer.swift */; };
+		922A52A94DC451236B4EDFF5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC9CD62573002D00B8DE27 /* MenuView.swift */; };
+		92EFB027825F97BA1DDBFB23 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F863602A75552D53749227 /* Theme.swift */; };
+		A3AA9F5CB37D951982E5E856 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C8B7A4E1273EFB678A2BC /* AppSettings.swift */; };
+		A67FA0B237F5E673E1931288 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F696D1ECBA13A22AEE589743 /* GameScreen.swift */; };
+		A74EC11A0F85CAFE0649D7D7 /* GameVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEACFA1FE1EBB75E400C33C /* GameVariant.swift */; };
+		B12DE799F967D8BCEF4C886B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C58AC65B75E6356947CC6E5 /* SettingsView.swift */; };
+		B654D1D3B082F62BB3FF93FC /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DA834D8292E6C32362465 /* Haptics.swift */; };
+		C67292948A68131A2E6D805E /* SuitShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D2CB6160408CF4406908CE /* SuitShapes.swift */; };
+		C9889B1B8229329C53762A9C /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8CD81C66C0592503601788 /* Move.swift */; };
+		DBFD538963AE3C15DCCF05E4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3829C0906C09E2263E359 /* CardView.swift */; };
+		E5E5BA0069D64709E8883873 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1947E287AB348456A9C93D /* GameStore.swift */; };
+		EF1C913F6C08E795A69F1D75 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC9172CD47CEEFDA68E5260 /* StoreTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D8578A69170A033E18A0F39F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E264EF2E98618BA32DCAF12 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0784BD821D68652C06F1349E;
+			remoteInfo = Crapette;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0748CAA43E6DA63B43816D7A /* RulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTests.swift; sourceTree = "<group>"; };
+		0C1947E287AB348456A9C93D /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
+		23448E1B39C8739864F0D256 /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
+		2D8CD81C66C0592503601788 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		4DB2B289D8BF23FA5AD22B3F /* CrapetteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrapetteApp.swift; sourceTree = "<group>"; };
+		54AC9CD62573002D00B8DE27 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		59579263FD0B8C4FEF7CE271 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		5A5CD78E9D4F9EA768BD5A48 /* AIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayer.swift; sourceTree = "<group>"; };
+		60C3829C0906C09E2263E359 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		6E5F99BDCCDDEF23E8855286 /* Crapette.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Crapette.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EC9172CD47CEEFDA68E5260 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		6F4DBBD0E84A339A2DD965B4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		7D96D14AF57E0ED51586E595 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8CF064A351E28A206BA12D01 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		9C58AC65B75E6356947CC6E5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ACEACFA1FE1EBB75E400C33C /* GameVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVariant.swift; sourceTree = "<group>"; };
+		AE8C8B7A4E1273EFB678A2BC /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		AF473D5ADCE8ACFAEFE98965 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		B4D2CB6160408CF4406908CE /* SuitShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuitShapes.swift; sourceTree = "<group>"; };
+		BC082881EBA5496211A58A44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C1F863602A75552D53749227 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D5671740418D94D4763D39EF /* BoardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLayout.swift; sourceTree = "<group>"; };
+		DB4DA834D8292E6C32362465 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		E49B8A9D5BA4ADDD8DD847BC /* CrapetteTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CrapetteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F563CFE7265338BB9E7DA358 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		F696D1ECBA13A22AEE589743 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0E58147461A1903781EA1453 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4DB2B289D8BF23FA5AD22B3F /* CrapetteApp.swift */,
+				F563CFE7265338BB9E7DA358 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		143537855177274626446D09 = {
+			isa = PBXGroup;
+			children = (
+				7CC0C486F58C13D106EE09CA /* Crapette */,
+				6724D7DAA2FEC54124449FAD /* CrapetteTests */,
+				4FE244903FA16C441BA2EBD1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4FE244903FA16C441BA2EBD1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E5F99BDCCDDEF23E8855286 /* Crapette.app */,
+				E49B8A9D5BA4ADDD8DD847BC /* CrapetteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5FECCCB5B5499E194F44C620 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D5671740418D94D4763D39EF /* BoardLayout.swift */,
+				59579263FD0B8C4FEF7CE271 /* BoardView.swift */,
+				60C3829C0906C09E2263E359 /* CardView.swift */,
+				F696D1ECBA13A22AEE589743 /* GameScreen.swift */,
+				54AC9CD62573002D00B8DE27 /* MenuView.swift */,
+				23448E1B39C8739864F0D256 /* RulesView.swift */,
+				9C58AC65B75E6356947CC6E5 /* SettingsView.swift */,
+				B4D2CB6160408CF4406908CE /* SuitShapes.swift */,
+				C1F863602A75552D53749227 /* Theme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6724D7DAA2FEC54124449FAD /* CrapetteTests */ = {
+			isa = PBXGroup;
+			children = (
+				0748CAA43E6DA63B43816D7A /* RulesTests.swift */,
+				6EC9172CD47CEEFDA68E5260 /* StoreTests.swift */,
+			);
+			path = CrapetteTests;
+			sourceTree = "<group>";
+		};
+		7CC0C486F58C13D106EE09CA /* Crapette */ = {
+			isa = PBXGroup;
+			children = (
+				0E58147461A1903781EA1453 /* App */,
+				C5E31A60FF56CD9376A46A6A /* Model */,
+				E7AA9BEC6D8D48EEF19E4406 /* Resources */,
+				5FECCCB5B5499E194F44C620 /* Views */,
+			);
+			path = Crapette;
+			sourceTree = "<group>";
+		};
+		C5E31A60FF56CD9376A46A6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A5CD78E9D4F9EA768BD5A48 /* AIPlayer.swift */,
+				AE8C8B7A4E1273EFB678A2BC /* AppSettings.swift */,
+				6F4DBBD0E84A339A2DD965B4 /* Card.swift */,
+				8CF064A351E28A206BA12D01 /* GameState.swift */,
+				0C1947E287AB348456A9C93D /* GameStore.swift */,
+				ACEACFA1FE1EBB75E400C33C /* GameVariant.swift */,
+				DB4DA834D8292E6C32362465 /* Haptics.swift */,
+				2D8CD81C66C0592503601788 /* Move.swift */,
+				7D96D14AF57E0ED51586E595 /* Persistence.swift */,
+				AF473D5ADCE8ACFAEFE98965 /* Rules.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7AA9BEC6D8D48EEF19E4406 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BC082881EBA5496211A58A44 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0784BD821D68652C06F1349E /* Crapette */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76FA39A87987FB3850BED8FF /* Build configuration list for PBXNativeTarget "Crapette" */;
+			buildPhases = (
+				AC58282D70EFA2D6632B9870 /* Sources */,
+				2448FFED797F1DDAF922B1EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Crapette;
+			packageProductDependencies = (
+			);
+			productName = Crapette;
+			productReference = 6E5F99BDCCDDEF23E8855286 /* Crapette.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E87FAD1275549D76EE89023D /* CrapetteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C654A2D8671834CD1137FA88 /* Build configuration list for PBXNativeTarget "CrapetteTests" */;
+			buildPhases = (
+				FF234A434F8E6908C349F810 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FFE871E110E669E3844D25C7 /* PBXTargetDependency */,
+			);
+			name = CrapetteTests;
+			packageProductDependencies = (
+			);
+			productName = CrapetteTests;
+			productReference = E49B8A9D5BA4ADDD8DD847BC /* CrapetteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E264EF2E98618BA32DCAF12 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0784BD821D68652C06F1349E = {
+						ProvisioningStyle = Automatic;
+					};
+					E87FAD1275549D76EE89023D = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 486811926C34FA84ABC01F0C /* Build configuration list for PBXProject "Crapette" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 143537855177274626446D09;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0784BD821D68652C06F1349E /* Crapette */,
+				E87FAD1275549D76EE89023D /* CrapetteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2448FFED797F1DDAF922B1EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11024EEA5FBC06ED5B7E8F07 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC58282D70EFA2D6632B9870 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82BDAB1BA084529EB9114BDA /* AIPlayer.swift in Sources */,
+				A3AA9F5CB37D951982E5E856 /* AppSettings.swift in Sources */,
+				44E2BB1197CB9E87A25F1A44 /* BoardLayout.swift in Sources */,
+				04D147F0F3A2CAB2D8F66161 /* BoardView.swift in Sources */,
+				09E496B032D742EE801AA75F /* Card.swift in Sources */,
+				DBFD538963AE3C15DCCF05E4 /* CardView.swift in Sources */,
+				485F78741838DAA62AF6D4F5 /* CrapetteApp.swift in Sources */,
+				A67FA0B237F5E673E1931288 /* GameScreen.swift in Sources */,
+				072E03FEF5A59B7A1B706446 /* GameState.swift in Sources */,
+				E5E5BA0069D64709E8883873 /* GameStore.swift in Sources */,
+				A74EC11A0F85CAFE0649D7D7 /* GameVariant.swift in Sources */,
+				B654D1D3B082F62BB3FF93FC /* Haptics.swift in Sources */,
+				922A52A94DC451236B4EDFF5 /* MenuView.swift in Sources */,
+				C9889B1B8229329C53762A9C /* Move.swift in Sources */,
+				23AE8A62BD6ED38CF2046F9C /* Persistence.swift in Sources */,
+				16EA1B60C8D1AC7F9752F6BA /* RootView.swift in Sources */,
+				25A786A6DA9B883D77895249 /* Rules.swift in Sources */,
+				085A2534FC3DC8757C19FD5C /* RulesView.swift in Sources */,
+				B12DE799F967D8BCEF4C886B /* SettingsView.swift in Sources */,
+				C67292948A68131A2E6D805E /* SuitShapes.swift in Sources */,
+				92EFB027825F97BA1DDBFB23 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF234A434F8E6908C349F810 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				723163C9F3CCAD6310D18AB8 /* RulesTests.swift in Sources */,
+				EF1C913F6C08E795A69F1D75 /* StoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FFE871E110E669E3844D25C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0784BD821D68652C06F1349E /* Crapette */;
+			targetProxy = D8578A69170A033E18A0F39F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0351C2A771E3A41CFE6F9A8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette.tests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=iphoneos*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=iphonesimulator*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Contents/MacOS/Crapette";
+			};
+			name = Release;
+		};
+		053E130488511CA2C898BB94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		1063A498683C37348CF6A9A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crapette;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette;
+				PRODUCT_NAME = Crapette;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		51B07315A88A73A038E3C4BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette.tests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=iphoneos*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=iphonesimulator*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette";
+				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Crapette.app/Contents/MacOS/Crapette";
+			};
+			name = Debug;
+		};
+		F217B273AA5ADB5DB4D3FAE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		FCFA3F21FCE5FFBA986A25E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crapette;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.crapette;
+				PRODUCT_NAME = Crapette;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		486811926C34FA84ABC01F0C /* Build configuration list for PBXProject "Crapette" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053E130488511CA2C898BB94 /* Debug */,
+				F217B273AA5ADB5DB4D3FAE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		76FA39A87987FB3850BED8FF /* Build configuration list for PBXNativeTarget "Crapette" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCFA3F21FCE5FFBA986A25E4 /* Debug */,
+				1063A498683C37348CF6A9A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C654A2D8671834CD1137FA88 /* Build configuration list for PBXNativeTarget "CrapetteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51B07315A88A73A038E3C4BB /* Debug */,
+				0351C2A771E3A41CFE6F9A8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E264EF2E98618BA32DCAF12 /* Project object */;
+}
