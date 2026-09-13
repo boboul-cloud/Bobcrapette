@@ -10,7 +10,9 @@ final class BoardInteractionTests: XCTestCase {
 
     private var app: XCUIApplication!
     private let heartsFoundation = "foundation-2"
-    private let deadline: TimeInterval = 25
+    /// Les machines d'intégration continue sont lentes : la donne peut
+    /// prendre bien plus de temps que sur une machine de développement.
+    private let deadline: TimeInterval = 90
 
     override func setUp() {
         continueAfterFailure = false
@@ -40,9 +42,21 @@ final class BoardInteractionTests: XCTestCase {
         app.descendants(matching: .any).matching(identifier: "slot-\(pile)").firstMatch
     }
 
+    /// Attend que la donne soit finie **et** que la main soit revenue au
+    /// joueur. L'apparition d'une carte ne suffit pas : pendant la
+    /// distribution, l'application n'accepte encore aucun coup.
     private func waitForBoard() {
-        XCTAssertTrue(card("crapette-south").waitForExistence(timeout: deadline),
+        XCTAssertTrue(app.staticTexts["À vous de jouer"].waitForExistence(timeout: deadline),
+                      "La donne ne s'est pas terminée, ou la main n'est pas au joueur")
+        XCTAssertTrue(card("crapette-south").waitForExistence(timeout: 10),
                       "Le tapis ne s'est pas affiché")
+    }
+
+    /// Attend qu'une carte soit effectivement choisie avant d'enchaîner.
+    private func waitUntilSelected(_ element: XCUIElement, timeout: TimeInterval = 15) {
+        let chosen = expectation(for: NSPredicate(format: "selected == true"),
+                                 evaluatedWith: element)
+        wait(for: [chosen], timeout: timeout)
     }
 
     // MARK: - Tests
@@ -63,10 +77,7 @@ final class BoardInteractionTests: XCTestCase {
         XCTAssertFalse(ace.isSelected, "La carte ne devait pas être déjà choisie")
 
         ace.tap()
-
-        let chosen = expectation(for: NSPredicate(format: "selected == true"),
-                                 evaluatedWith: ace)
-        wait(for: [chosen], timeout: 5)
+        waitUntilSelected(ace)
     }
 
     func testDeuxTapesEnvoientLAsSurSaFondation() {
@@ -75,10 +86,11 @@ final class BoardInteractionTests: XCTestCase {
                        "La fondation de cœur devait être vide au départ")
 
         let ace = card("crapette-south")
-        ace.tap()   // choisit la carte
-        ace.tap()   // la joue sur sa fondation
+        ace.tap()                 // choisit la carte
+        waitUntilSelected(ace)    // la deuxième tape n'a de sens qu'après
+        ace.tap()                 // la joue sur sa fondation
 
-        XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 5),
+        XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 15),
                       "L'As n'est pas monté sur sa fondation")
     }
 
@@ -86,9 +98,9 @@ final class BoardInteractionTests: XCTestCase {
         waitForBoard()
         XCTAssertFalse(card(heartsFoundation).exists)
 
-        card("crapette-south").press(forDuration: 0.2, thenDragTo: slot(heartsFoundation))
+        card("crapette-south").press(forDuration: 0.3, thenDragTo: slot(heartsFoundation))
 
-        XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 5),
+        XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 15),
                       "Le glisser-déposer n'a pas déplacé l'As")
     }
 
@@ -97,7 +109,7 @@ final class BoardInteractionTests: XCTestCase {
         card("stock-south").tap()
 
         let warning = app.staticTexts["Coup obligatoire"]
-        XCTAssertTrue(warning.waitForExistence(timeout: 5),
+        XCTAssertTrue(warning.waitForExistence(timeout: 15),
                       "L'aide visuelle n'a pas signalé le coup obligatoire")
 
         app.buttons["Jouer le coup"].tap()
@@ -108,9 +120,6 @@ final class BoardInteractionTests: XCTestCase {
         waitForBoard()
         let column = card("tableau-0")
         column.tap()
-
-        let chosen = expectation(for: NSPredicate(format: "selected == true"),
-                                 evaluatedWith: column)
-        wait(for: [chosen], timeout: 5)
+        waitUntilSelected(column)
     }
 }
