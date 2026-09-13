@@ -1,5 +1,5 @@
 import Testing
-@testable import Crapette
+@testable import Bobcrapette
 
 private let tarot = VariantPreset.tarot77.variant
 

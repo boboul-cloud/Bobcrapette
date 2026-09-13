@@ -1,7 +1,7 @@
 import CoreGraphics
 import Foundation
 import Testing
-@testable import Crapette
+@testable import Bobcrapette
 
 private let variant = VariantPreset.tarot77.variant
 

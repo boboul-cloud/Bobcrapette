@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0784BD821D68652C06F1349E"
-               BuildableName = "Crapette.app"
-               BlueprintName = "Crapette"
-               ReferencedContainer = "container:Crapette.xcodeproj">
+               BlueprintIdentifier = "E92B08EEBAFEE00CE3F190C6"
+               BuildableName = "Bobcrapette.app"
+               BlueprintName = "Bobcrapette"
+               ReferencedContainer = "container:Bobcrapette.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E87FAD1275549D76EE89023D"
-               BuildableName = "CrapetteTests.xctest"
-               BlueprintName = "CrapetteTests"
-               ReferencedContainer = "container:Crapette.xcodeproj">
+               BlueprintIdentifier = "DADF1BBD4522E69A42E9DB72"
+               BuildableName = "BobcrapetteUITests.xctest"
+               BlueprintName = "BobcrapetteUITests"
+               ReferencedContainer = "container:Bobcrapette.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,15 +42,14 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
       onlyGenerateCoverageForSpecifiedTargets = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0784BD821D68652C06F1349E"
-            BuildableName = "Crapette.app"
-            BlueprintName = "Crapette"
-            ReferencedContainer = "container:Crapette.xcodeproj">
+            BlueprintIdentifier = "E92B08EEBAFEE00CE3F190C6"
+            BuildableName = "Bobcrapette.app"
+            BlueprintName = "Bobcrapette"
+            ReferencedContainer = "container:Bobcrapette.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -59,10 +58,10 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E87FAD1275549D76EE89023D"
-               BuildableName = "CrapetteTests.xctest"
-               BlueprintName = "CrapetteTests"
-               ReferencedContainer = "container:Crapette.xcodeproj">
+               BlueprintIdentifier = "DADF1BBD4522E69A42E9DB72"
+               BuildableName = "BobcrapetteUITests.xctest"
+               BlueprintName = "BobcrapetteUITests"
+               ReferencedContainer = "container:Bobcrapette.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -83,14 +82,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0784BD821D68652C06F1349E"
-            BuildableName = "Crapette.app"
-            BlueprintName = "Crapette"
-            ReferencedContainer = "container:Crapette.xcodeproj">
+            BlueprintIdentifier = "E92B08EEBAFEE00CE3F190C6"
+            BuildableName = "Bobcrapette.app"
+            BlueprintName = "Bobcrapette"
+            ReferencedContainer = "container:Bobcrapette.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -102,10 +99,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0784BD821D68652C06F1349E"
-            BuildableName = "Crapette.app"
-            BlueprintName = "Crapette"
-            ReferencedContainer = "container:Crapette.xcodeproj">
+            BlueprintIdentifier = "E92B08EEBAFEE00CE3F190C6"
+            BuildableName = "Bobcrapette.app"
+            BlueprintName = "Bobcrapette"
+            ReferencedContainer = "container:Bobcrapette.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

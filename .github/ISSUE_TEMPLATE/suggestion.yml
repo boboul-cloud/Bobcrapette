@@ -1,0 +1,14 @@
+name: Proposer une amélioration
+description: Une idée pour le jeu, une règle de votre famille, une variante.
+labels: ["suggestion"]
+body:
+  - type: textarea
+    id: idee
+    attributes:
+      label: Votre idée
+    validations:
+      required: true
+  - type: textarea
+    id: raison
+    attributes:
+      label: Pourquoi cela améliorerait le jeu

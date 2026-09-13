@@ -1,0 +1,38 @@
+name: Signaler une anomalie
+description: Quelque chose ne se passe pas comme prévu dans le jeu.
+labels: ["anomalie"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Ce qui se passe
+      description: Décrivez le problème tel que vous l'avez vu.
+    validations:
+      required: true
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Ce que vous attendiez
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Comment le reproduire
+      placeholder: |
+        1. Nouvelle partie
+        2. Toucher la carte retournée de la crapette
+        3. …
+  - type: input
+    id: appareil
+    attributes:
+      label: Appareil et version du système
+      placeholder: iPhone 17 Pro, iOS 26.5
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version de Bobcrapette
+      description: Elle figure dans Réglages, section « À propos ».
+      placeholder: 1.0 (1)

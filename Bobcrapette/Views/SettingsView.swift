@@ -79,6 +79,23 @@ struct SettingsView: View {
                         confirmReset = true
                     }
                 }
+
+                Section {
+                    LabeledContent("Version", value: Self.version)
+                    Link(destination: Self.privacy) {
+                        Label("Politique de confidentialité", systemImage: "hand.raised")
+                    }
+                    Link(destination: Self.terms) {
+                        Label("Conditions d'utilisation", systemImage: "doc.text")
+                    }
+                    Link(destination: Self.support) {
+                        Label("Assistance", systemImage: "lifepreserver")
+                    }
+                } header: {
+                    Text("À propos")
+                } footer: {
+                    Text("Bobcrapette ne collecte aucune donnée et ne se connecte à aucun serveur. Vos parties, vos réglages et vos statistiques ne quittent jamais cet appareil.")
+                }
             }
             .formStyle(.grouped)
             .navigationTitle("Réglages")
@@ -102,5 +119,18 @@ struct SettingsView: View {
 
     private var speedLabel: String {
         String(format: "×%.2g", settings.animationSpeed)
+    }
+
+    // MARK: - Mentions
+
+    private static let site = "https://boboul-cloud.github.io/Bobcrapette"
+    private static let privacy = URL(string: "\(site)/confidentialite.html")!
+    private static let terms = URL(string: "\(site)/conditions.html")!
+    private static let support = URL(string: "\(site)/assistance.html")!
+
+    private static var version: String {
+        let marketing = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
+        return "\(marketing) (\(build))"
     }
 }

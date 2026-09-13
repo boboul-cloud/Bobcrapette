@@ -1,4 +1,4 @@
-name: Crapette
+name: Bobcrapette
 options:
   bundleIdPrefix: com.oulhen
   createIntermediateGroups: true
@@ -19,23 +19,23 @@ settings:
     DEAD_CODE_STRIPPING: YES
 
 targets:
-  Crapette:
+  Bobcrapette:
     type: application
     supportedDestinations: [iOS, macOS]
     deploymentTarget:
       iOS: "17.0"
       macOS: "14.0"
     sources:
-      - path: Crapette
+      - path: Bobcrapette
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.crapette
-        PRODUCT_NAME: Crapette
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.bobcrapette
+        PRODUCT_NAME: Bobcrapette
         GENERATE_INFOPLIST_FILE: YES
         ENABLE_PREVIEWS: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
-        INFOPLIST_KEY_CFBundleDisplayName: Crapette
+        INFOPLIST_KEY_CFBundleDisplayName: Bobcrapette
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIRequiresFullScreen: NO
         # L'iPad n'exige pas le plein écran, il doit donc accepter les quatre
@@ -43,7 +43,10 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
-        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        INFOPLIST_KEY_NSHumanReadableCopyright: "© 2026 Robert Oulhen. Tous droits réservés."
+        # L'application n'utilise aucun chiffrement : évite la déclaration de
+        # conformité à l'exportation à chaque envoi sur App Store Connect.
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.card-games"
         INFOPLIST_KEY_UIUserInterfaceStyle: Light
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -53,61 +56,61 @@ targets:
         ENABLE_HARDENED_RUNTIME: YES
         COMBINE_HIDPI_IMAGES: YES
 
-  CrapetteTests:
+  BobcrapetteTests:
     type: bundle.unit-test
     supportedDestinations: [iOS, macOS]
     deploymentTarget:
       iOS: "17.0"
       macOS: "14.0"
     sources:
-      - path: CrapetteTests
+      - path: BobcrapetteTests
     dependencies:
-      - target: Crapette
+      - target: Bobcrapette
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.crapette.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.bobcrapette.tests
         GENERATE_INFOPLIST_FILE: YES
         # L'exécutable hôte ne se trouve pas au même endroit selon la plateforme.
-        "TEST_HOST[sdk=macosx*]": "$(BUILT_PRODUCTS_DIR)/Crapette.app/Contents/MacOS/Crapette"
-        "TEST_HOST[sdk=iphoneos*]": "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette"
-        "TEST_HOST[sdk=iphonesimulator*]": "$(BUILT_PRODUCTS_DIR)/Crapette.app/Crapette"
+        "TEST_HOST[sdk=macosx*]": "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Contents/MacOS/Bobcrapette"
+        "TEST_HOST[sdk=iphoneos*]": "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette"
+        "TEST_HOST[sdk=iphonesimulator*]": "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette"
         BUNDLE_LOADER: "$(TEST_HOST)"
 
-  CrapetteUITests:
+  BobcrapetteUITests:
     type: bundle.ui-testing
     supportedDestinations: [iOS]
     deploymentTarget:
       iOS: "17.0"
     sources:
-      - path: CrapetteUITests
+      - path: BobcrapetteUITests
     dependencies:
-      - target: Crapette
+      - target: Bobcrapette
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.crapette.uitests
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.bobcrapette.uitests
         GENERATE_INFOPLIST_FILE: YES
-        TEST_TARGET_NAME: Crapette
+        TEST_TARGET_NAME: Bobcrapette
 
 schemes:
-  Crapette:
+  Bobcrapette:
     build:
       targets:
-        Crapette: all
-        CrapetteTests: [test]
+        Bobcrapette: all
+        BobcrapetteTests: [test]
     run:
       config: Debug
     test:
       config: Debug
       gatherCoverageData: true
       targets:
-        - CrapetteTests
+        - BobcrapetteTests
 
-  CrapetteUI:
+  BobcrapetteUI:
     build:
       targets:
-        Crapette: all
-        CrapetteUITests: [test]
+        Bobcrapette: all
+        BobcrapetteUITests: [test]
     test:
       config: Debug
       targets:
-        - CrapetteUITests
+        - BobcrapetteUITests

@@ -1,0 +1,700 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00FDCF12FFDD3E88C412AEBA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEDD64F6B7059C2D7CE2A8F /* RootView.swift */; };
+		011CD12A6C3AF3ABCD0F28DF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFFB1CEA10EFAE4B882E4A /* Card.swift */; };
+		07C09BD688D302BC9E609C4F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E702E327596E4013078986DA /* Persistence.swift */; };
+		0B9BF1615A2F4EA830D89C75 /* CrapetteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAD1A2565C1BD6E95C83A2C /* CrapetteApp.swift */; };
+		0E209C6CB5A5F71BB2A85D61 /* SuitShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0E9455C8768455475AA434 /* SuitShapes.swift */; };
+		12689D127FD2E99F5B0FCB27 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615CD29920576716AC96A80F /* MenuView.swift */; };
+		20166FC28070E5A9112DCFD8 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F76F87F8B61723CF658EA44 /* AIPlayer.swift */; };
+		28698FDF8C9B8A83EF168AC6 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C563B5451E262AB9B648D9 /* GameScreen.swift */; };
+		388C0868E29F1716BE44E034 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC25CB475B590A92924F6E92 /* BoardView.swift */; };
+		57D4FFF8954BD1856D4ABE9D /* RulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14A98A58E78DC562B7AB0C /* RulesTests.swift */; };
+		5DEFD346D8EEFD5FD3E83C54 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83635BAE23E593060051C87B /* AppSettings.swift */; };
+		7DC66A3E83567BAF7DD6C5B5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146B24C735D56F4E194D4F49 /* Theme.swift */; };
+		86CFF8C7027C51B0F3657F47 /* BoardInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADB555560C0D4731561024 /* BoardInteractionTests.swift */; };
+		8E112E1A71A20994EDF9BC40 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B0209EEC762284560EB74D /* Move.swift */; };
+		934840154D3428B457AA2F36 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0E33489ABC6AD1637DBAF /* Rules.swift */; };
+		A1ECD31CBE297E66893C993E /* GameVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8E058A95A7406CAACE8E83 /* GameVariant.swift */; };
+		A45F764C6A1142446D6A72A1 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E926DDDCED7817AA3003D5 /* CardView.swift */; };
+		AAD6C7B60D46903AD0039D65 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CDB590BE6856490D318E53 /* GameStore.swift */; };
+		B45C5BDD1193DF22E8FB157D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F094D59E07B8298B368729 /* SettingsView.swift */; };
+		BADEDB8AEA3592597D7D9F64 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA749C257663745C1CA15CBE /* RulesView.swift */; };
+		BFE597EAC0F1146F0F6E3798 /* BoardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968EB132ED138725A70AB446 /* BoardLayout.swift */; };
+		DEA0FE0E066E62E4AD5A0E0A /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2E88739D909B9840683D8B /* Haptics.swift */; };
+		DF9697257E1A07518347E9CE /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B819EFAD06B63F2F156D00C1 /* StoreTests.swift */; };
+		EA000AA04F2E193E399A0766 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC7309BF3A796C311F2F099 /* GameState.swift */; };
+		F64C723255731A37EB299A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B598F8663255419C58FFECBC /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1B1CC6BA8B34266FB9C04298 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 716D4A5406A3160D8FBF3C22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E92B08EEBAFEE00CE3F190C6;
+			remoteInfo = Bobcrapette;
+		};
+		DD5827B6B065FB92C1DE8C1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 716D4A5406A3160D8FBF3C22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E92B08EEBAFEE00CE3F190C6;
+			remoteInfo = Bobcrapette;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		146B24C735D56F4E194D4F49 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		17DFFB1CEA10EFAE4B882E4A /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		3B8E058A95A7406CAACE8E83 /* GameVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVariant.swift; sourceTree = "<group>"; };
+		42E926DDDCED7817AA3003D5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		52CDB590BE6856490D318E53 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
+		615CD29920576716AC96A80F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		6EDB65D8CCB9A0E25CDCD0A5 /* Bobcrapette.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Bobcrapette.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81B0E33489ABC6AD1637DBAF /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		83635BAE23E593060051C87B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		8F76F87F8B61723CF658EA44 /* AIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayer.swift; sourceTree = "<group>"; };
+		8FAD1A2565C1BD6E95C83A2C /* CrapetteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrapetteApp.swift; sourceTree = "<group>"; };
+		91C563B5451E262AB9B648D9 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		91F094D59E07B8298B368729 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		968EB132ED138725A70AB446 /* BoardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLayout.swift; sourceTree = "<group>"; };
+		A1FAE441DCCA76800071C2E7 /* BobcrapetteUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BobcrapetteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC7309BF3A796C311F2F099 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		B598F8663255419C58FFECBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B6B0209EEC762284560EB74D /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		B819EFAD06B63F2F156D00C1 /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		BA749C257663745C1CA15CBE /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
+		C2ADB555560C0D4731561024 /* BoardInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardInteractionTests.swift; sourceTree = "<group>"; };
+		CC25CB475B590A92924F6E92 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		CE14A98A58E78DC562B7AB0C /* RulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTests.swift; sourceTree = "<group>"; };
+		CFEDD64F6B7059C2D7CE2A8F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		DB0E9455C8768455475AA434 /* SuitShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuitShapes.swift; sourceTree = "<group>"; };
+		DD2E88739D909B9840683D8B /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		DE04AFE5102E3CB924234B0E /* BobcrapetteTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BobcrapetteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E702E327596E4013078986DA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1CC90BFC5DC9F2C39FC6110F /* BobcrapetteTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE14A98A58E78DC562B7AB0C /* RulesTests.swift */,
+				B819EFAD06B63F2F156D00C1 /* StoreTests.swift */,
+			);
+			path = BobcrapetteTests;
+			sourceTree = "<group>";
+		};
+		309E9496ABAD90C7CF4570D7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8FAD1A2565C1BD6E95C83A2C /* CrapetteApp.swift */,
+				CFEDD64F6B7059C2D7CE2A8F /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5ADCBE37DFA4202B8ED9166A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				968EB132ED138725A70AB446 /* BoardLayout.swift */,
+				CC25CB475B590A92924F6E92 /* BoardView.swift */,
+				42E926DDDCED7817AA3003D5 /* CardView.swift */,
+				91C563B5451E262AB9B648D9 /* GameScreen.swift */,
+				615CD29920576716AC96A80F /* MenuView.swift */,
+				BA749C257663745C1CA15CBE /* RulesView.swift */,
+				91F094D59E07B8298B368729 /* SettingsView.swift */,
+				DB0E9455C8768455475AA434 /* SuitShapes.swift */,
+				146B24C735D56F4E194D4F49 /* Theme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6BA8B0404DBA0673FDA7ACE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B598F8663255419C58FFECBC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B08ADF71D6271AB7CA9061B2 /* BobcrapetteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C2ADB555560C0D4731561024 /* BoardInteractionTests.swift */,
+			);
+			path = BobcrapetteUITests;
+			sourceTree = "<group>";
+		};
+		C3A55FD7D55BEE30A45BB0C8 = {
+			isa = PBXGroup;
+			children = (
+				FD975588279653BF2F501911 /* Bobcrapette */,
+				1CC90BFC5DC9F2C39FC6110F /* BobcrapetteTests */,
+				B08ADF71D6271AB7CA9061B2 /* BobcrapetteUITests */,
+				EB0E7F2ADD2ED521ED05CBEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB0E7F2ADD2ED521ED05CBEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6EDB65D8CCB9A0E25CDCD0A5 /* Bobcrapette.app */,
+				DE04AFE5102E3CB924234B0E /* BobcrapetteTests.xctest */,
+				A1FAE441DCCA76800071C2E7 /* BobcrapetteUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7DE6ADFAE46D126E33BDF3C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F76F87F8B61723CF658EA44 /* AIPlayer.swift */,
+				83635BAE23E593060051C87B /* AppSettings.swift */,
+				17DFFB1CEA10EFAE4B882E4A /* Card.swift */,
+				AAC7309BF3A796C311F2F099 /* GameState.swift */,
+				52CDB590BE6856490D318E53 /* GameStore.swift */,
+				3B8E058A95A7406CAACE8E83 /* GameVariant.swift */,
+				DD2E88739D909B9840683D8B /* Haptics.swift */,
+				B6B0209EEC762284560EB74D /* Move.swift */,
+				E702E327596E4013078986DA /* Persistence.swift */,
+				81B0E33489ABC6AD1637DBAF /* Rules.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FD975588279653BF2F501911 /* Bobcrapette */ = {
+			isa = PBXGroup;
+			children = (
+				309E9496ABAD90C7CF4570D7 /* App */,
+				F7DE6ADFAE46D126E33BDF3C /* Model */,
+				6BA8B0404DBA0673FDA7ACE4 /* Resources */,
+				5ADCBE37DFA4202B8ED9166A /* Views */,
+			);
+			path = Bobcrapette;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9EA747AEE56D891478E993CD /* BobcrapetteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD1E4CBE3E0A48F57AFF3CD6 /* Build configuration list for PBXNativeTarget "BobcrapetteTests" */;
+			buildPhases = (
+				13D7CBC94DA5A9DC8FE7DB39 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5FFB27C22190BA27CED014C9 /* PBXTargetDependency */,
+			);
+			name = BobcrapetteTests;
+			packageProductDependencies = (
+			);
+			productName = BobcrapetteTests;
+			productReference = DE04AFE5102E3CB924234B0E /* BobcrapetteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DADF1BBD4522E69A42E9DB72 /* BobcrapetteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DC09038D1CD528E2E2D3508 /* Build configuration list for PBXNativeTarget "BobcrapetteUITests" */;
+			buildPhases = (
+				2FA94F150665DE86F8DCE456 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29CA122FD4F32D0D3101DDE6 /* PBXTargetDependency */,
+			);
+			name = BobcrapetteUITests;
+			packageProductDependencies = (
+			);
+			productName = BobcrapetteUITests;
+			productReference = A1FAE441DCCA76800071C2E7 /* BobcrapetteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		E92B08EEBAFEE00CE3F190C6 /* Bobcrapette */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A1E00DB83F1B5CBB3ACCB22 /* Build configuration list for PBXNativeTarget "Bobcrapette" */;
+			buildPhases = (
+				A4620946950B958271859D13 /* Sources */,
+				EEB9B7D8B1C250247765D721 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bobcrapette;
+			packageProductDependencies = (
+			);
+			productName = Bobcrapette;
+			productReference = 6EDB65D8CCB9A0E25CDCD0A5 /* Bobcrapette.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		716D4A5406A3160D8FBF3C22 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9EA747AEE56D891478E993CD = {
+						DevelopmentTeam = 38DQ8FW23J;
+						ProvisioningStyle = Automatic;
+					};
+					DADF1BBD4522E69A42E9DB72 = {
+						DevelopmentTeam = 38DQ8FW23J;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E92B08EEBAFEE00CE3F190C6;
+					};
+					E92B08EEBAFEE00CE3F190C6 = {
+						DevelopmentTeam = 38DQ8FW23J;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 74E77FB7AA509E22FB2621D6 /* Build configuration list for PBXProject "Bobcrapette" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C3A55FD7D55BEE30A45BB0C8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E92B08EEBAFEE00CE3F190C6 /* Bobcrapette */,
+				9EA747AEE56D891478E993CD /* BobcrapetteTests */,
+				DADF1BBD4522E69A42E9DB72 /* BobcrapetteUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEB9B7D8B1C250247765D721 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F64C723255731A37EB299A36 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		13D7CBC94DA5A9DC8FE7DB39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57D4FFF8954BD1856D4ABE9D /* RulesTests.swift in Sources */,
+				DF9697257E1A07518347E9CE /* StoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2FA94F150665DE86F8DCE456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86CFF8C7027C51B0F3657F47 /* BoardInteractionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4620946950B958271859D13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20166FC28070E5A9112DCFD8 /* AIPlayer.swift in Sources */,
+				5DEFD346D8EEFD5FD3E83C54 /* AppSettings.swift in Sources */,
+				BFE597EAC0F1146F0F6E3798 /* BoardLayout.swift in Sources */,
+				388C0868E29F1716BE44E034 /* BoardView.swift in Sources */,
+				011CD12A6C3AF3ABCD0F28DF /* Card.swift in Sources */,
+				A45F764C6A1142446D6A72A1 /* CardView.swift in Sources */,
+				0B9BF1615A2F4EA830D89C75 /* CrapetteApp.swift in Sources */,
+				28698FDF8C9B8A83EF168AC6 /* GameScreen.swift in Sources */,
+				EA000AA04F2E193E399A0766 /* GameState.swift in Sources */,
+				AAD6C7B60D46903AD0039D65 /* GameStore.swift in Sources */,
+				A1ECD31CBE297E66893C993E /* GameVariant.swift in Sources */,
+				DEA0FE0E066E62E4AD5A0E0A /* Haptics.swift in Sources */,
+				12689D127FD2E99F5B0FCB27 /* MenuView.swift in Sources */,
+				8E112E1A71A20994EDF9BC40 /* Move.swift in Sources */,
+				07C09BD688D302BC9E609C4F /* Persistence.swift in Sources */,
+				00FDCF12FFDD3E88C412AEBA /* RootView.swift in Sources */,
+				934840154D3428B457AA2F36 /* Rules.swift in Sources */,
+				BADEDB8AEA3592597D7D9F64 /* RulesView.swift in Sources */,
+				B45C5BDD1193DF22E8FB157D /* SettingsView.swift in Sources */,
+				0E209C6CB5A5F71BB2A85D61 /* SuitShapes.swift in Sources */,
+				7DC66A3E83567BAF7DD6C5B5 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		29CA122FD4F32D0D3101DDE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E92B08EEBAFEE00CE3F190C6 /* Bobcrapette */;
+			targetProxy = DD5827B6B065FB92C1DE8C1B /* PBXContainerItemProxy */;
+		};
+		5FFB27C22190BA27CED014C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E92B08EEBAFEE00CE3F190C6 /* Bobcrapette */;
+			targetProxy = 1B1CC6BA8B34266FB9C04298 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		120A17AACD6FDAFD0C30ABD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 38DQ8FW23J;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		6D2117364D7C85A63B55FBB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette.tests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=iphoneos*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=iphonesimulator*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Contents/MacOS/Bobcrapette";
+			};
+			name = Debug;
+		};
+		940A7028F8BE9B0D2C7C8BBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette.tests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=iphoneos*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=iphonesimulator*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Bobcrapette";
+				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Bobcrapette.app/Contents/MacOS/Bobcrapette";
+			};
+			name = Release;
+		};
+		A9BCDAEAF440D858D06AC50A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Bobcrapette;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Robert Oulhen. Tous droits réservés.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette;
+				PRODUCT_NAME = Bobcrapette;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B16E66A8D0CD9C69CB3134AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette.uitests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Bobcrapette;
+			};
+			name = Release;
+		};
+		C0F31F4147FE99EC7D0F531D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Bobcrapette;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Robert Oulhen. Tous droits réservés.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette;
+				PRODUCT_NAME = Bobcrapette;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C5C210F03DDFD24DE205BD3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oulhen.bobcrapette.uitests;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Bobcrapette;
+			};
+			name = Debug;
+		};
+		FAB4DCDEEB10AFC59BE0CACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 38DQ8FW23J;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A1E00DB83F1B5CBB3ACCB22 /* Build configuration list for PBXNativeTarget "Bobcrapette" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9BCDAEAF440D858D06AC50A /* Debug */,
+				C0F31F4147FE99EC7D0F531D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		74E77FB7AA509E22FB2621D6 /* Build configuration list for PBXProject "Bobcrapette" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				120A17AACD6FDAFD0C30ABD6 /* Debug */,
+				FAB4DCDEEB10AFC59BE0CACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8DC09038D1CD528E2E2D3508 /* Build configuration list for PBXNativeTarget "BobcrapetteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5C210F03DDFD24DE205BD3C /* Debug */,
+				B16E66A8D0CD9C69CB3134AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DD1E4CBE3E0A48F57AFF3CD6 /* Build configuration list for PBXNativeTarget "BobcrapetteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2117364D7C85A63B55FBB3 /* Debug */,
+				940A7028F8BE9B0D2C7C8BBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 716D4A5406A3160D8FBF3C22 /* Project object */;
+}

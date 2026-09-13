@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Écrire directement
+    url: mailto:bob.oulhen@gmail.com
+    about: Pour toute question qui ne relève pas d'une anomalie.
+  - name: Règles du jeu
+    url: https://boboul-cloud.github.io/Bobcrapette/assistance.html
+    about: Les règles de la variante jouée et les questions fréquentes.

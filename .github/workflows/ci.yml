@@ -1,0 +1,76 @@
+name: Contrôle continu
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Les machines d'intégration n'ont ni certificat ni équipe de développement.
+  SANS_SIGNATURE: CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO DEVELOPMENT_TEAM=
+
+jobs:
+  moteur:
+    name: Moteur de règles et conduite de partie
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Version de Xcode
+        run: xcodebuild -version
+
+      - name: Tests
+        run: |
+          xcodebuild test \
+            -project Bobcrapette.xcodeproj \
+            -scheme Bobcrapette \
+            -destination 'platform=macOS' \
+            $SANS_SIGNATURE
+
+  interface:
+    name: Interface sur simulateur
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Choisir un iPhone disponible
+        id: simulateur
+        run: |
+          UDID=$(xcrun simctl list devices available --json | python3 -c "
+          import json, sys
+          appareils = json.load(sys.stdin)['devices']
+          for runtime in sorted(appareils, reverse=True):
+              for appareil in appareils[runtime]:
+                  if appareil.get('isAvailable') and 'iPhone' in appareil['name']:
+                      print(appareil['udid'])
+                      raise SystemExit
+          raise SystemExit('aucun iPhone disponible')
+          ")
+          echo "Simulateur retenu : $UDID"
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Tests d'interface
+        run: |
+          xcodebuild test \
+            -project Bobcrapette.xcodeproj \
+            -scheme BobcrapetteUI \
+            -destination "id=${{ steps.simulateur.outputs.udid }}" \
+            $SANS_SIGNATURE
+
+  construction:
+    name: Construction iPhone et iPad
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construire pour appareil
+        run: |
+          xcodebuild build \
+            -project Bobcrapette.xcodeproj \
+            -scheme Bobcrapette \
+            -destination 'generic/platform=iOS' \
+            $SANS_SIGNATURE

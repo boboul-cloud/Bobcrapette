@@ -15,7 +15,7 @@ struct MenuView: View {
                     .frame(height: 168)
 
                 VStack(spacing: 6) {
-                    Text("Crapette")
+                    Text("Bobcrapette")
                         .font(.system(size: 46, weight: .bold, design: .serif))
                         .foregroundStyle(Theme.parchment)
                     Text("La réussite à deux, au jeu de tarot")
@@ -71,10 +71,10 @@ private struct CardFanEmblem: View {
             let width = min(geo.size.height / Theme.cardHeight, 96)
             ZStack {
                 ForEach(Array(cards.enumerated()), id: \.offset) { index, card in
-                    let angle = Double(index - 2) * 9
+                    let angle = Double(index - 2) * 8
                     CardView(card: card, faceUp: true, suitedRanks: 14, width: width)
                         .rotationEffect(.degrees(angle), anchor: .bottom)
-                        .offset(x: CGFloat(index - 2) * width * 0.72,
+                        .offset(x: CGFloat(index - 2) * width * 0.60,
                                 y: abs(CGFloat(index - 2)) * width * 0.045)
                 }
             }
