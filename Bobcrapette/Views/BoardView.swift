@@ -12,6 +12,24 @@ struct BoardView: View {
     @Environment(GameStore.self) private var store
 
     @State private var drag: DragInfo?
+    /// La carte affichée en grand tant que le doigt reste posé.
+    @State private var magnifier: Magnifier?
+    /// Filet de sécurité : referme la loupe si la fin du geste se perd.
+    @State private var magnifierTimeout: Task<Void, Never>?
+    /// Vrai dès que la loupe s'est ouverte pendant l'appui en cours. Le
+    /// relâchement ne vaut alors plus une tape : sans cela, lire une carte
+    /// déjà choisie reviendrait à la jouer.
+    @State private var didMagnify = false
+
+    /// Durée d'appui qui ouvre la loupe. Assez longue pour laisser passer
+    /// une tape et le départ d'un glissement, assez courte pour venir d'elle
+    /// même quand on s'arrête sur une carte pour la déchiffrer.
+    private static let magnifierDelay: Double = 0.45
+
+    /// Hauteur du tapis qu'occupe la loupe, nom compris. Au-dessus de cette
+    /// fraction, la carte touchée laisse la place d'ouvrir la loupe en haut,
+    /// donc au-dessus de la main ; en dessous, il ne reste que le bas.
+    private static let magnifierClearance: CGFloat = 0.47
 
     /// Repère fixe du tapis. Le glissement doit s'y mesurer : dans le repère
     /// de la carte, qui suit le doigt, le déplacement se replierait sur
@@ -21,6 +39,15 @@ struct BoardView: View {
     struct DragInfo: Equatable {
         var source: MoveSource
         var translation: CGSize
+    }
+
+    /// La carte lue à la loupe, et de quel côté du tapis la poser.
+    struct Magnifier: Equatable {
+        var card: Card
+        /// Vrai quand il reste la place d'ouvrir la loupe au-dessus du doigt.
+        /// C'est le bon côté par défaut : la main vient du bas de l'écran et
+        /// masque tout ce qui se trouve sous elle.
+        var atTop: Bool
     }
 
     private var animation: Animation {
@@ -52,6 +79,7 @@ struct BoardView: View {
                    alignment: .topLeading)
             .coordinateSpace(.named(Self.boardSpace))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay { magnifierLayer(geometry.size) }
             .animation(animation, value: store.state)
         }
     }
@@ -102,6 +130,7 @@ struct BoardView: View {
             .accessibilityIdentifier(placed.isTop ? "top-\(Self.identifier(for: placed.pile))" : "")
             .accessibilityAddTraits(isSelected(placed) ? [.isSelected, .isButton] : .isButton)
             .gesture(cardGesture(placed, layout: layout, scale: scale))
+            .simultaneousGesture(magnifierGesture(placed, layout: layout))
             .scaleEffect(dragging ? 1.06 : 1)
             .position(
                 x: placed.frame.midX * scale + (dragging ? drag?.translation.width ?? 0 : 0),
@@ -141,6 +170,9 @@ struct BoardView: View {
                 if drag == nil {
                     guard hypot(value.translation.width, value.translation.height) > scale * 0.10
                     else { return }
+                    // La carte s'en va : la loupe n'a plus lieu d'être, et le
+                    // joueur enchaîne son coup sans avoir à lever le doigt.
+                    closeMagnifier()
                     drag = DragInfo(source: source, translation: value.translation)
                     store.selection = source
                 } else {
@@ -150,11 +182,15 @@ struct BoardView: View {
             .onEnded { value in
                 let travelled = hypot(value.translation.width, value.translation.height)
                 let source = drag?.source ?? placed.source
+                let read = didMagnify
+                didMagnify = false
+                closeMagnifier()
 
-                // Doigt resté sur place : c'est une tape.
+                // Doigt resté sur place : c'est une tape — sauf si l'appui
+                // n'a servi qu'à lire la carte à la loupe.
                 guard travelled > scale * 0.16, placed.isDraggable, let source else {
                     withAnimation(animation) { drag = nil }
-                    if travelled <= scale * 0.16 { store.tap(placed.pile) }
+                    if travelled <= scale * 0.16, !read { store.tap(placed.pile) }
                     return
                 }
 
@@ -175,6 +211,67 @@ struct BoardView: View {
                     drag = nil
                 }
             }
+    }
+
+    // MARK: - La loupe
+
+    /// Maintenir le doigt sur une carte l'affiche en grand, avec son nom
+    /// écrit en toutes lettres : sur l'écran d'un iPhone, le pique se
+    /// confond vite avec le trèfle, et le cœur avec le carreau.
+    ///
+    /// Le geste est simultané de celui de la carte, qui garde la main : la
+    /// loupe s'ouvre quand le doigt s'attarde, et se referme aussitôt que
+    /// la carte part ou que le doigt se lève.
+    private func magnifierGesture(_ placed: PlacedCard, layout: BoardLayout) -> some Gesture {
+        LongPressGesture(minimumDuration: Self.magnifierDelay)
+            .onEnded { _ in
+                guard placed.faceUp, drag == nil, store.settings.magnifierEnabled else { return }
+                openMagnifier(card: placed.card,
+                              atTop: placed.frame.midY
+                                  > layout.boardSize.height * Self.magnifierClearance)
+            }
+    }
+
+    private func openMagnifier(card: Card, atTop: Bool) {
+        Haptics.light(enabled: store.settings.hapticsEnabled)
+        didMagnify = true
+        withAnimation(.easeOut(duration: 0.16)) {
+            magnifier = Magnifier(card: card, atTop: atTop)
+        }
+        // Si jamais la fin du geste se perdait, la loupe ne doit pas rester
+        // posée sur le tapis.
+        magnifierTimeout?.cancel()
+        magnifierTimeout = Task {
+            try? await Task.sleep(for: .seconds(10))
+            guard !Task.isCancelled else { return }
+            didMagnify = false
+            closeMagnifier()
+        }
+    }
+
+    private func closeMagnifier() {
+        magnifierTimeout?.cancel()
+        magnifierTimeout = nil
+        guard magnifier != nil else { return }
+        withAnimation(.easeOut(duration: 0.16)) { magnifier = nil }
+    }
+
+    @ViewBuilder
+    private func magnifierLayer(_ size: CGSize) -> some View {
+        if let magnifier {
+            ZStack(alignment: magnifier.atTop ? .top : .bottom) {
+                Color.black.opacity(0.45)
+                MagnifiedCard(card: magnifier.card,
+                              suitedRanks: store.state.variant.suitedRanks,
+                              available: size)
+                    .padding(.vertical, size.height * 0.015)
+            }
+            // Le doigt est encore posé sur la carte : la loupe ne doit
+            // intercepter ni ce geste, ni les suivants.
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+            .transition(.opacity)
+        }
     }
 
     private func emphasis(for placed: PlacedCard) -> CardEmphasis {
@@ -345,6 +442,39 @@ private struct SlotView: View {
             }
         default:
             EmptyView()
+        }
+    }
+}
+
+// MARK: - La carte lue à la loupe
+
+/// La carte affichée en grand, et son nom écrit en toutes lettres : c'est
+/// ce nom qui lève définitivement le doute entre le pique et le trèfle, ou
+/// entre le cœur et le carreau, quand les enseignes sont trop petites.
+private struct MagnifiedCard: View {
+    let card: Card
+    let suitedRanks: Int
+    let available: CGSize
+
+    /// Aussi grande que la moitié du tapis le permet : la loupe se pose du
+    /// côté opposé au doigt, elle doit donc tenir dans une moitié, nom
+    /// compris. Sur un iPhone, cela fait tout de même plus de trois fois
+    /// la taille d'une carte du tapis.
+    private var width: CGFloat {
+        min(available.width * 0.58, available.height * 0.35 / Theme.cardHeight)
+    }
+
+    var body: some View {
+        VStack(spacing: width * 0.09) {
+            CardView(card: card, faceUp: true, suitedRanks: suitedRanks, width: width)
+            Text(card.fullName(suitedRanks: suitedRanks))
+                .font(.system(size: width * 0.155, weight: .bold, design: .rounded))
+                .foregroundStyle(SuitPip.ghostTint(for: card.family))
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .padding(.horizontal, width * 0.12)
+                .padding(.vertical, width * 0.05)
+                .background(Capsule().fill(Color.black.opacity(0.85)))
         }
     }
 }

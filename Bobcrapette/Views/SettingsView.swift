@@ -46,6 +46,21 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Picker("Crier à tort", selection: $settings.falseCallPenalty) {
+                        ForEach(FalseCallPenalty.allCases) { penalty in
+                            Text(penalty.title).tag(penalty)
+                        }
+                    }
+                    Text(settings.falseCallPenalty.subtitle)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                } header: {
+                    Text("Le cri de « Crapette ! »")
+                } footer: {
+                    Text("Le bouton « Crapette ! » reste toujours à sa place et ne vous souffle rien : c'est à vous de voir que l'adversaire a laissé passer un coup obligatoire, et de le dire avant d'avoir joué votre premier coup.")
+                }
+
+                Section {
                     Toggle("Aide visuelle", isOn: $settings.assistEnabled)
                     Toggle("Autoriser l'annulation", isOn: $settings.allowUndo)
                 } header: {
@@ -54,7 +69,7 @@ struct SettingsView: View {
                     Text("L'aide visuelle signale les coups obligatoires d'un liseré orange et vous prévient avant une faute. Sans elle, les règles sont appliquées sans avertissement.")
                 }
 
-                Section("Confort") {
+                Section {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
                             Text("Vitesse des animations")
@@ -63,9 +78,14 @@ struct SettingsView: View {
                         }
                         Slider(value: $settings.animationSpeed, in: 0.5...2.0, step: 0.25)
                     }
+                    Toggle("Loupe au toucher", isOn: $settings.magnifierEnabled)
                     #if os(iOS)
                     Toggle("Retour haptique", isOn: $settings.hapticsEnabled)
                     #endif
+                } header: {
+                    Text("Confort")
+                } footer: {
+                    Text("La loupe affiche la carte en grand, avec son nom écrit en toutes lettres, tant que le doigt reste posé dessus. Relâchez pour la refermer, ou glissez pour jouer la carte sans lever le doigt.")
                 }
 
                 Section("Statistiques") {

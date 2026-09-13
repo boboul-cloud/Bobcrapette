@@ -22,10 +22,11 @@ enum Difficulty: String, CaseIterable, Codable, Sendable, Identifiable {
     }
 
     /// Probabilité que l'IA néglige ses coups obligatoires pendant un tour,
-    /// offrant au joueur l'occasion de crier « Crapette ! ».
+    /// offrant au joueur l'occasion de crier « Crapette ! ». Rien ne le lui
+    /// signale : le niveau débutant fournit donc de quoi s'exercer l'œil.
     var sloppinessPerTurn: Double {
         switch self {
-        case .beginner: 0.30
+        case .beginner: 0.50
         case .normal: 0.07
         case .expert: 0.0
         }
@@ -100,13 +101,22 @@ struct AIPlayer: Sendable {
     mutating func chooseAction(in state: GameState, visited: Set<Int>, movesPlayed: Int) -> GameAction {
         guard state.winner == nil else { return .endTurn }
 
-        if !isSloppyTurn, let obligation = Rules.obligations(for: side, in: state).first {
+        // Une liste, pas un ensemble : l'ordre doit rester le même d'une
+        // exécution à l'autre pour que les parties tirées d'une graine
+        // se rejouent à l'identique.
+        let obligations = Rules.obligations(for: side, in: state)
+        if !isSloppyTurn, let obligation = obligations.first {
             return .move(obligation)
         }
         guard movesPlayed < maxMovesPerTurn else { return .endTurn }
 
         var candidates: [(move: Move, value: Double)] = []
         for move in Rules.legalMoves(for: side, in: state, deduplicating: true) {
+            // Un tour bâclé doit l'être pour de bon : sans cette mise à
+            // l'écart, l'IA rejouerait ses obligations d'elle-même — ce sont
+            // des montées sur fondation, donc les coups les mieux notés — et
+            // le joueur n'aurait jamais l'occasion de crier « Crapette ! ».
+            guard !obligations.contains(move) else { continue }
             var next = state
             Rules.apply(move, by: side, to: &next)
             guard !visited.contains(next.positionSignature) else { continue }

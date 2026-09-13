@@ -25,14 +25,24 @@ private func card(_ family: Family, _ rank: Int, _ deck: Side = .south) -> Card 
 }
 
 @MainActor
-private func makeStore(difficulty: Difficulty = .expert, assist: Bool = true) -> GameStore {
+private func makeStore(difficulty: Difficulty = .expert, assist: Bool = true,
+                      opponentSeed: UInt64? = nil) -> GameStore {
     // Réglages isolés : les tests n'écrivent pas dans les préférences réelles.
     let defaults = UserDefaults(suiteName: "crapette.tests.\(UUID().uuidString)")!
     let settings = AppSettings(defaults: defaults)
     settings.difficulty = difficulty
     settings.assistEnabled = assist
     settings.allowUndo = true
-    return GameStore(settings: settings)
+    return GameStore(settings: settings, opponentSeed: opponentSeed)
+}
+
+/// Une graine qui fait bâcler son tour à l'adversaire débutant.
+private func sloppySeed() -> UInt64? {
+    (UInt64(1)...400).first { seed in
+        var ai = AIPlayer(side: .north, difficulty: .beginner, seed: seed)
+        ai.beginTurn()
+        return ai.isSloppyTurn
+    }
 }
 
 @Suite("Conduite de la partie")
@@ -219,6 +229,100 @@ struct GameStoreTests {
                 "L'As de cœur devait monter sur sa fondation")
         #expect(store.state.waste(.north).count == 1, "Le tour se clôt en retournant une carte")
         #expect(!store.isOpponentActing)
+        store.abandonGame()
+    }
+
+    // MARK: - Le cri de « Crapette ! »
+
+    @Test("Crier juste reprend à l'adversaire sa carte retournée", .timeLimit(.minutes(1)))
+    func aRightCallCostsTheOpponentTheDraw() async throws {
+        let seed = try #require(sloppySeed(), "Aucune graine ne fait bâcler l'adversaire")
+        let store = makeStore(difficulty: .beginner, opponentSeed: seed)
+        store.settings.animationSpeed = 2.5
+
+        var state = position(current: .north)
+        // Un As dans sa crapette : bâclé, son tour laisse passer l'obligation.
+        state.crapette[Side.north.index] = [card(.spades, 9, .north), card(.hearts, 1, .north)]
+        state.stock[Side.north.index] = [card(.clubs, 4, .north), card(.diamonds, 6, .north)]
+        state.stock[Side.south.index] = [card(.clubs, 8)]
+        store.setUp(with: state)
+
+        try await waitUntil(seconds: 25) { store.state.current == .south }
+        #expect(store.state.foundations[heartsFoundation].isEmpty,
+                "L'adversaire devait laisser passer son As")
+        #expect(store.state.waste(.north).count == 1, "Il a fini son tour en retournant une carte")
+        #expect(store.canCallCrapette)
+
+        store.callCrapette()
+        #expect(store.banner?.text == "Crapette !")
+        #expect(store.state.waste(.north).isEmpty, "Le cri lui reprend sa carte retournée")
+        #expect(store.state.stock(.north).count == 2)
+        #expect(!store.canCallCrapette, "On ne crie qu'une fois par tour")
+        store.abandonGame()
+    }
+
+    @Test("Crier à tort fait perdre la main")
+    func aFalseCallCostsTheTurn() {
+        let store = makeStore()
+        store.settings.falseCallPenalty = .loseTurn
+        var state = position()
+        state.stock[Side.south.index] = [card(.hearts, 5), card(.spades, 9)]
+        state.stock[Side.north.index] = [card(.clubs, 4, .north)]
+        store.setUp(with: state)
+
+        #expect(store.canCallCrapette, "Le bouton est offert sans rien promettre")
+        store.callCrapette()
+        #expect(store.banner?.text == "Crapette ? Non.")
+        #expect(store.state.current == .north)
+        #expect(store.state.waste(.south).isEmpty, "La main se perd sans retourner de carte")
+        #expect(store.state.stock(.south).count == 2)
+        store.abandonGame()
+    }
+
+    @Test("Sans sanction, le cri à tort laisse la main")
+    func aHarmlessFalseCallKeepsTheHand() {
+        let store = makeStore()
+        store.settings.falseCallPenalty = .harmless
+        var state = position()
+        state.crapette[Side.south.index] = [card(.hearts, 4)]
+        state.stock[Side.south.index] = [card(.spades, 9)]
+        store.setUp(with: state)
+
+        store.callCrapette()
+        #expect(store.banner?.text == "Crapette ? Non.")
+        #expect(store.state.current == .south, "La main reste au joueur")
+        #expect(!store.canCallCrapette, "Mais on ne crie qu'une fois par tour")
+        store.abandonGame()
+    }
+
+    @Test("Les erreurs comptées s'égrènent")
+    func rationedFalseCallsRunOut() {
+        let store = makeStore()
+        store.settings.falseCallPenalty = .rationed
+        var state = position()
+        state.stock[Side.south.index] = [card(.spades, 9)]
+        store.setUp(with: state)
+
+        #expect(store.falseCallBadge == "3")
+        store.callCrapette()
+        #expect(store.falseCallsLeft == 2)
+        #expect(store.falseCallBadge == "2")
+        #expect(store.state.current == .south, "Les erreurs comptées ne coûtent pas la main")
+        store.abandonGame()
+    }
+
+    @Test("Le cri n'est plus recevable une fois un coup joué")
+    func theCallClosesAfterTheFirstMove() {
+        let store = makeStore()
+        var state = position()
+        state.crapette[Side.south.index] = [card(.hearts, 4), card(.hearts, 1)]
+        state.stock[Side.south.index] = [card(.spades, 7)]
+        store.setUp(with: state)
+
+        #expect(store.canCallCrapette)
+        store.play(Move(source: .crapette(.south), target: .foundation(heartsFoundation)))
+        #expect(store.state.movesThisTurn == 1)
+        #expect(!store.canCallCrapette, "Le moment du cri est passé")
         store.abandonGame()
     }
 

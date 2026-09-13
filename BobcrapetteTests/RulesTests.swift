@@ -335,6 +335,38 @@ struct AITests {
         }
     }
 
+    @Test("Un tour bâclé laisse vraiment passer l'obligation")
+    func sloppyTurnSkipsObligation() {
+        // Une position où l'IA n'a qu'un coup, et il est obligatoire :
+        // seule sa négligence peut la faire rendre la main sans le jouer.
+        var state = emptyState(current: .north)
+        state.tableau[2] = [card(.hearts, 1, .north)]
+        let obligations = Rules.obligations(for: .north, in: state)
+        #expect(!obligations.isEmpty, "L'As posé là doit être obligatoire")
+
+        // Bâcler son tour est tiré au sort : on cherche une graine qui le donne.
+        var sloppy: AIPlayer?
+        for seed in UInt64(1)...200 {
+            var ai = AIPlayer(side: .north, difficulty: .beginner, seed: seed)
+            ai.beginTurn()
+            if ai.isSloppyTurn { sloppy = ai; break }
+        }
+        guard var careless = sloppy else {
+            Issue.record("Aucune graine ne donne un tour bâclé")
+            return
+        }
+
+        #expect(careless.chooseAction(in: state, visited: [], movesPlayed: 0) == .endTurn,
+                "Bâclée, l'IA doit rendre la main sans monter son As : c'est ce qui ouvre le « Crapette ! »")
+
+        var careful = AIPlayer(side: .north, difficulty: .expert, seed: 1)
+        careful.beginTurn()
+        switch careful.chooseAction(in: state, visited: [], movesPlayed: 0) {
+        case .move(let move): #expect(obligations.contains(move))
+        case .endTurn: Issue.record("Un niveau fort ne laisse pas passer son As")
+        }
+    }
+
     @Test("Le conseil proposé au joueur est toujours jouable")
     func hintIsPlayable() {
         let state = GameState.dealt(variant: tarot, seed: 11, firstPlayer: .south)

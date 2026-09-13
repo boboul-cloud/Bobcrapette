@@ -33,13 +33,6 @@ struct GameScreen: View {
                     .allowsHitTesting(false)
             }
 
-            if store.crapetteOpportunity != nil {
-                CrapetteCallButton(progress: store.crapetteCountdown) { store.callCrapette() }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding(.bottom, 86)
-                    .transition(.scale(scale: 0.7).combined(with: .opacity))
-            }
-
             if let warning = store.faultWarning {
                 FaultWarningPanel(
                     warning: warning,
@@ -58,7 +51,6 @@ struct GameScreen: View {
             }
         }
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: store.banner)
-        .animation(.spring(response: 0.35, dampingFraction: 0.8), value: store.crapetteOpportunity)
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: store.faultWarning)
         .animation(.easeInOut(duration: 0.3), value: store.phase)
         .sheet(isPresented: $showSettings) { SettingsView() }
@@ -101,12 +93,21 @@ struct GameScreen: View {
     private var bottomBar: some View {
         HStack(spacing: 10) {
             ActionButton(title: "Annuler", symbol: "arrow.uturn.backward",
-                         enabled: store.canUndo, prominent: false) { store.undo() }
+                         enabled: store.canUndo, prominent: false,
+                         iconOnly: isCompact) { store.undo() }
                 .keyboardShortcut("z", modifiers: .command)
 
             ActionButton(title: "Indice", symbol: "lightbulb",
-                         enabled: store.canHumanAct, prominent: false) { store.showHint() }
+                         enabled: store.canHumanAct, prominent: false,
+                         iconOnly: isCompact) { store.showHint() }
                 .keyboardShortcut("h", modifiers: [])
+
+            // Toujours là, et muet : sa présence ne dit rien de la faute
+            // d'en face. C'est au joueur de la voir et de la dénoncer.
+            ActionButton(title: "Crapette !", symbol: "exclamationmark.bubble",
+                         enabled: store.canCallCrapette, prominent: false,
+                         accent: Theme.obligation, badge: store.falseCallBadge) { store.callCrapette() }
+                .keyboardShortcut("c", modifiers: [])
 
             Spacer(minLength: 0)
 
@@ -201,25 +202,48 @@ private struct CardCountBadge: View {
     }
 }
 
+/// Un bouton de la barre du bas. Sur iPhone, les actions secondaires se
+/// réduisent à leur symbole : il faut quatre boutons sur une largeur qui en
+/// tenait trois, et le libellé reste dans l'étiquette d'accessibilité.
 private struct ActionButton: View {
     let title: String
     let symbol: String
     let enabled: Bool
     let prominent: Bool
+    /// Couleur du texte, pour distinguer un bouton sans le rendre criard.
+    var accent: Color?
+    /// Petit compteur accolé au libellé, quand il y a quelque chose à compter.
+    var badge: String?
+    var iconOnly = false
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             HStack(spacing: 6) {
-                Image(systemName: symbol).font(.system(size: 13, weight: .semibold))
-                Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                Image(systemName: symbol)
+                    .font(.system(size: iconOnly ? 16 : 13, weight: .semibold))
+                if !iconOnly {
+                    Text(title)
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                if let badge {
+                    Text(badge)
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1)
+                        .background(Capsule().fill(Color.black.opacity(0.35)))
+                }
             }
-            .foregroundStyle(prominent ? Color(red: 0.12, green: 0.16, blue: 0.13) : .white.opacity(0.9))
+            .foregroundStyle(prominent ? Color(red: 0.12, green: 0.16, blue: 0.13)
+                                       : (accent ?? .white.opacity(0.9)))
             .padding(.horizontal, 14)
             .padding(.vertical, 9)
+            // Réduit à son symbole, le bouton garderait une cible trop
+            // petite pour le pouce : on lui rend sa surface.
+            .frame(minWidth: iconOnly ? 44 : 0, minHeight: iconOnly ? 38 : 0)
             .background(
                 Capsule().fill(prominent
                                ? AnyShapeStyle(LinearGradient(colors: [Theme.selection, Theme.selection.opacity(0.82)],
@@ -230,6 +254,7 @@ private struct ActionButton: View {
         .buttonStyle(.plain)
         .disabled(!enabled)
         .opacity(enabled ? 1 : 0.4)
+        .accessibilityLabel(title)
     }
 }
 
@@ -271,52 +296,6 @@ private struct BannerView: View {
                     .strokeBorder(accent.opacity(0.5), lineWidth: 1.5))
         )
         .padding(.horizontal, 20)
-    }
-}
-
-/// Le bouton qui n'apparaît que quelques secondes, quand l'adversaire
-/// a laissé passer un coup obligatoire.
-private struct CrapetteCallButton: View {
-    let progress: Double
-    let action: () -> Void
-    @State private var pulse = false
-
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 3) {
-                Text("CRAPETTE !")
-                    .font(.system(size: 25, weight: .heavy, design: .serif))
-                Text("L'adversaire a oublié un coup obligatoire")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .opacity(0.85)
-            }
-            .foregroundStyle(.white)
-            .padding(.horizontal, 30)
-            .padding(.vertical, 14)
-            .background(
-                ZStack(alignment: .leading) {
-                    Capsule().fill(LinearGradient(
-                        colors: [Theme.obligation, Theme.red],
-                        startPoint: .top, endPoint: .bottom))
-                    GeometryReader { geo in
-                        Capsule()
-                            .fill(Color.white.opacity(0.22))
-                            .frame(width: geo.size.width * progress)
-                    }
-                }
-                .clipShape(Capsule())
-            )
-            .overlay(Capsule().strokeBorder(.white.opacity(0.5), lineWidth: 2))
-            .shadow(color: Theme.obligation.opacity(0.6), radius: 18)
-            .scaleEffect(pulse ? 1.04 : 0.98)
-        }
-        .buttonStyle(.plain)
-        .keyboardShortcut("c", modifiers: [])
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.45).repeatForever(autoreverses: true)) {
-                pulse = true
-            }
-        }
     }
 }
 

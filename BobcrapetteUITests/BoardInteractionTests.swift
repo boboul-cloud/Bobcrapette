@@ -59,6 +59,17 @@ final class BoardInteractionTests: XCTestCase {
         wait(for: [chosen], timeout: timeout)
     }
 
+    /// Fait défiler la liste jusqu'à ce que le libellé apparaisse.
+    private func descendreJusqua(_ label: String, _ message: String) {
+        let element = app.staticTexts[label]
+        var defilements = 0
+        while !element.exists && defilements < 12 {
+            app.swipeUp()
+            defilements += 1
+        }
+        XCTAssertTrue(element.exists, message)
+    }
+
     // MARK: - Tests
 
     func testLeTapisEstCompletEtAtteignable() {
@@ -122,22 +133,44 @@ final class BoardInteractionTests: XCTestCase {
         XCTAssertTrue(app.buttons["Terminé"].waitForExistence(timeout: 15),
                       "Les réglages ne se sont pas ouverts")
 
-        // La section « À propos » ferme la liste : SwiftUI ne construit ses
-        // lignes qu'une fois qu'elles approchent de l'écran.
-        let site = app.staticTexts["Site du jeu"]
-        var defilements = 0
-        while !site.exists && defilements < 10 {
-            app.swipeUp()
-            defilements += 1
-        }
+        // La section « À propos » ferme la liste, et SwiftUI ne construit ses
+        // lignes qu'une fois qu'elles approchent de l'écran : chaque lien se
+        // cherche donc en descendant, sans supposer qu'ils tiennent tous
+        // dans la même hauteur d'écran.
+        descendreJusqua("Site du jeu", "Le lien vers le site manque dans les réglages")
+        descendreJusqua("Politique de confidentialité",
+                        "Le lien vers la politique de confidentialité manque")
+        descendreJusqua("Conditions d'utilisation", "Le lien vers les conditions manque")
+        descendreJusqua("Assistance", "Le lien vers l'assistance manque")
+    }
 
-        XCTAssertTrue(site.exists, "Le lien vers le site manque dans les réglages")
-        XCTAssertTrue(app.staticTexts["Politique de confidentialité"].exists,
-                      "Le lien vers la politique de confidentialité manque")
-        XCTAssertTrue(app.staticTexts["Conditions d'utilisation"].exists,
-                      "Le lien vers les conditions manque")
-        XCTAssertTrue(app.staticTexts["Assistance"].exists,
-                      "Le lien vers l'assistance manque")
+    /// La loupe ne peut pas se vérifier à l'écran : le geste de test rend la
+    /// main après avoir relâché, et elle s'est déjà refermée. On vérifie donc
+    /// sa conséquence, celle qui compte : lire une carte ne la joue pas.
+    func testMaintenirLeDoigtSurUneCarteNeLaChoisitPas() {
+        waitForBoard()
+        let ace = card("crapette-south")
+        ace.press(forDuration: 1.2)
+        XCTAssertFalse(ace.isSelected,
+                       "Lire une carte à la loupe ne doit pas la choisir : sinon un second appui la jouerait")
+    }
+
+    /// Le bouton du cri ne doit rien trahir : il est là tout le temps, et sa
+    /// disponibilité ne dépend que du moment du tour, jamais de la faute d'en face.
+    func testLeBoutonCrapetteEstToujoursLaPuisSeFerme() {
+        waitForBoard()
+        let cri = app.buttons["Crapette !"]
+        XCTAssertTrue(cri.exists, "Le bouton « Crapette ! » doit rester en place")
+        XCTAssertTrue(cri.isEnabled, "Au début de son tour, le joueur peut crier")
+
+        // Une fois un coup joué, le moment du cri est passé.
+        let ace = card("crapette-south")
+        ace.tap()
+        waitUntilSelected(ace)
+        ace.tap()
+        XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 15),
+                      "L'As n'est pas monté sur sa fondation")
+        XCTAssertFalse(cri.isEnabled, "Après un coup joué, on ne crie plus")
     }
 
     func testUneCarteDeColonneSeChoisitAussi() {

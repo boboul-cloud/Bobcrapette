@@ -30,9 +30,9 @@ final class GameStore {
         var reason: String
     }
 
-    /// L'IA vient de bâcler son tour : le joueur a quelques secondes
-    /// pour crier « Crapette ! ».
-    struct CrapetteOpportunity: Identifiable, Equatable {
+    /// L'adversaire vient de bâcler son tour. Le magasin le sait — il ne le
+    /// dit à personne : c'est au joueur de le repérer sur le tapis.
+    struct OpponentFault: Identifiable, Equatable {
         let id = UUID()
         var snapshot: GameState
         var missed: Move
@@ -53,8 +53,13 @@ final class GameStore {
 
     var banner: Banner?
     var faultWarning: FaultWarning?
-    private(set) var crapetteOpportunity: CrapetteOpportunity?
-    private(set) var crapetteCountdown: Double = 0
+    /// La faute de l'adversaire, tenue secrète : rien dans l'interface ne doit
+    /// en trahir la présence, sinon le cri n'est plus qu'une formalité.
+    private var opponentFault: OpponentFault?
+    /// Le tour où le joueur a déjà crié : on ne crie qu'une fois par tour.
+    private var criedOnTurn: Int?
+    /// Erreurs de cri qu'il reste au joueur, quand le réglage les compte.
+    private(set) var falseCallsLeft = FalseCallPenalty.allowance
 
     let settings: AppSettings
 
@@ -65,16 +70,24 @@ final class GameStore {
     private var opponentTask: Task<Void, Never>?
     private var dealTask: Task<Void, Never>?
     private var bannerTask: Task<Void, Never>?
-    private var opportunityTask: Task<Void, Never>?
     private var hintTask: Task<Void, Never>?
 
-    /// Durée pendant laquelle le bouton « Crapette ! » reste offert.
-    private let crapetteWindow: Double = 4.5
+    /// Graine de l'adversaire. Fixée, elle rend ses décisions reproductibles,
+    /// y compris les tours qu'il choisit de bâcler : sans cela, le
+    /// « Crapette ! » ne serait pas testable.
+    private let opponentSeed: UInt64?
 
-    init(settings: AppSettings = .shared) {
+    init(settings: AppSettings = .shared, opponentSeed: UInt64? = nil) {
         self.settings = settings
+        self.opponentSeed = opponentSeed
         self.state = GameState.undealt(variant: settings.variant, seed: 1, firstPlayer: .south)
-        self.opponent = AIPlayer(side: .north, difficulty: settings.difficulty)
+        self.opponent = AIPlayer(side: .north, difficulty: settings.difficulty,
+                                 seed: opponentSeed ?? UInt64.random(in: 1...UInt64.max))
+    }
+
+    private func freshOpponent() -> AIPlayer {
+        AIPlayer(side: .north, difficulty: settings.difficulty,
+                 seed: opponentSeed ?? UInt64.random(in: 1...UInt64.max))
     }
 
     // MARK: - Cycle de vie d'une partie
@@ -91,7 +104,7 @@ final class GameStore {
         state = GameState.undealt(variant: variant,
                                   seed: seed ?? UInt64.random(in: 1...UInt64.max),
                                   firstPlayer: first)
-        opponent = AIPlayer(side: .north, difficulty: settings.difficulty)
+        opponent = freshOpponent()
         undoStack.removeAll()
         selection = nil
         phase = .dealing
@@ -119,7 +132,7 @@ final class GameStore {
 
     func resumeSavedGame() {
         guard let saved = GameArchive.load() else { savedGameAvailable = false; return }
-        opponent = AIPlayer(side: .north, difficulty: settings.difficulty)
+        opponent = freshOpponent()
         setUp(with: saved.state)
     }
 
@@ -146,9 +159,10 @@ final class GameStore {
         opponentTask?.cancel()
         dealTask?.cancel()
         bannerTask?.cancel()
-        opportunityTask?.cancel()
         hintTask?.cancel()
-        crapetteOpportunity = nil
+        opponentFault = nil
+        criedOnTurn = nil
+        falseCallsLeft = FalseCallPenalty.allowance
         faultWarning = nil
         banner = nil
         hintMove = nil
@@ -181,7 +195,6 @@ final class GameStore {
 
     func tap(_ pile: PileRef) {
         guard canHumanAct else { return }
-        crapetteOpportunity = nil
 
         switch pile {
         case .stock(.south):
@@ -265,7 +278,8 @@ final class GameStore {
 
     func play(_ move: Move) {
         guard canHumanAct, Rules.isLegal(move, for: .south, in: state) else { return }
-        crapetteOpportunity = nil
+        // Le premier coup joué clôt le moment du cri.
+        opponentFault = nil
         if settings.allowUndo { undoStack.append(state) }
         Rules.apply(move, by: .south, to: &state)
         selection = nil
@@ -352,6 +366,8 @@ final class GameStore {
         selection = nil
         undoStack.removeAll()
         hintMove = nil
+        // Le tour change de main : la faute d'en face, criée ou non, est périmée.
+        opponentFault = nil
         Rules.endTurn(for: .south, in: &state, drawing: drawing)
         refresh()
         save()
@@ -398,7 +414,7 @@ final class GameStore {
                 let missed = Rules.obligations(for: .north, in: state).first
                 let snapshot = state
                 endOpponentTurn(drawing: true)
-                if let missed { openCrapetteOpportunity(snapshot: snapshot, missed: missed) }
+                if let missed { opponentFault = OpponentFault(snapshot: snapshot, missed: missed) }
                 return
             }
         }
@@ -416,50 +432,92 @@ final class GameStore {
         else { announceTurn() }
     }
 
-    private func openCrapetteOpportunity(snapshot: GameState, missed: Move) {
-        opportunityTask?.cancel()
-        crapetteOpportunity = CrapetteOpportunity(snapshot: snapshot, missed: missed)
-        crapetteCountdown = 1
-        Haptics.light(enabled: settings.hapticsEnabled)
-        opportunityTask = Task { [weak self] in
-            guard let self else { return }
-            let steps = 45
-            for step in 0..<steps {
-                try? await Task.sleep(for: .seconds(crapetteWindow / Double(steps)))
-                guard !Task.isCancelled, crapetteOpportunity != nil else { return }
-                crapetteCountdown = 1 - Double(step + 1) / Double(steps)
-            }
-            crapetteOpportunity = nil
-        }
+    // MARK: - Le cri de « Crapette ! »
+
+    /// Le cri est-il recevable ? Uniquement au moment où il a un sens : à vous
+    /// de jouer, avant d'avoir bougé la moindre carte.
+    ///
+    /// Cette disponibilité ne dit rien de la faute : elle est exactement la
+    /// même que l'adversaire ait bâclé son tour ou l'ait joué proprement.
+    /// C'est tout l'intérêt — c'est au joueur de regarder le tapis.
+    var canCallCrapette: Bool {
+        canHumanAct
+            && state.movesThisTurn == 0
+            && criedOnTurn != state.turnNumber
+            && !(settings.falseCallPenalty == .rationed && falseCallsLeft == 0)
     }
 
-    /// Le joueur crie « Crapette ! » : on rejoue la fin de tour de l'IA,
-    /// cette fois sans qu'elle retourne de carte.
-    func callCrapette() {
-        guard let opportunity = crapetteOpportunity else { return }
-        opportunityTask?.cancel()
-        crapetteOpportunity = nil
+    /// Le compte d'erreurs restantes, à afficher quand le réglage les compte.
+    var falseCallBadge: String? {
+        settings.falseCallPenalty == .rationed ? "\(falseCallsLeft)" : nil
+    }
 
-        var corrected = opportunity.snapshot
+    /// Le joueur crie « Crapette ! ». Rien ne le lui a soufflé : c'est un pari
+    /// sur ce qu'il a vu. S'il a raison, on rejoue la fin de tour de
+    /// l'adversaire, cette fois sans qu'il retourne de carte.
+    func callCrapette() {
+        guard canCallCrapette else { return }
+        criedOnTurn = state.turnNumber
+        selection = nil
+        hintMove = nil
+
+        guard let fault = opponentFault else {
+            missCall()
+            return
+        }
+        opponentFault = nil
+
+        var corrected = fault.snapshot
         Rules.endTurn(for: .north, in: &corrected, drawing: false)
         state = corrected
         undoStack.removeAll()
         Haptics.success(enabled: settings.hapticsEnabled)
         show(Banner(
             text: "Crapette !",
-            detail: "Bien vu : l'adversaire devait jouer \(describe(opportunity.missed)). Il passe la main sans retourner de carte.",
+            detail: "Bien vu : l'adversaire devait jouer \(describe(fault.missed)). Il passe la main sans retourner de carte.",
             style: .crapette
         ))
         refresh()
         save()
     }
 
+    /// Le cri tombe à plat. Ce qu'il en coûte dépend du réglage : sans prix,
+    /// rien n'empêcherait d'appuyer à chaque tour au cas où.
+    private func missCall() {
+        Haptics.warning(enabled: settings.hapticsEnabled)
+        let title = "Crapette ? Non."
+
+        switch settings.falseCallPenalty {
+        case .loseTurn:
+            show(Banner(text: title,
+                        detail: "L'adversaire n'avait rien oublié : vous passez la main sans retourner de carte.",
+                        style: .warning))
+            finishHumanTurn(drawing: false)
+
+        case .harmless:
+            show(Banner(text: title, detail: "L'adversaire n'avait rien oublié.", style: .warning))
+            refresh()
+
+        case .rationed:
+            falseCallsLeft = max(0, falseCallsLeft - 1)
+            let reste: String
+            switch falseCallsLeft {
+            case 0: reste = "Vous ne pouvez plus crier de cette partie."
+            case 1: reste = "Il vous reste une erreur."
+            default: reste = "Il vous reste \(falseCallsLeft) erreurs."
+            }
+            show(Banner(text: title,
+                        detail: "L'adversaire n'avait rien oublié. \(reste)",
+                        style: .warning))
+            refresh()
+        }
+    }
+
     // MARK: - Fin de partie
 
     private func finish() {
         opponentTask?.cancel()
-        opportunityTask?.cancel()
-        crapetteOpportunity = nil
+        opponentFault = nil
         phase = .finished
         let winner = state.winner ?? .north
         settings.recordResult(won: winner == .south)
@@ -472,8 +530,7 @@ final class GameStore {
     /// Aucun des deux joueurs ne peut plus rien faire.
     private func finishDraw() {
         opponentTask?.cancel()
-        opportunityTask?.cancel()
-        crapetteOpportunity = nil
+        opponentFault = nil
         phase = .finished
         settings.recordResult(won: false)
         GameArchive.clear()

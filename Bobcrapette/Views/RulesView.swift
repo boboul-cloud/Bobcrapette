@@ -70,7 +70,7 @@ struct RulesView: View {
                         1. poser un As ou l'atout 1 dès qu'il est disponible ;
                         2. poser sur une fondation la carte retournée de sa propre crapette, si elle y a sa place.
                         Celui qui termine son tour en laissant passer l'un de ces coups se fait crier « Crapette ! » : il perd la main sans retourner de carte, et le coup obligatoire l'attend toujours au tour suivant.
-                        Le cri marche dans les deux sens — surveillez l'adversaire, un bouton apparaît quelques secondes quand il faute.
+                        Le cri marche dans les deux sens, mais rien ne vous préviendra : le bouton « Crapette ! » est toujours à sa place en bas de l'écran, et c'est à vous de repérer que l'adversaire a laissé traîner un As ou la carte retournée de sa crapette. Criez avant d'avoir joué votre premier coup du tour — ensuite le moment est passé.
                         """
                     )
 
@@ -80,8 +80,10 @@ struct RulesView: View {
                         • Touchez une carte : elle se met en avant et les emplacements où elle peut aller s'allument en vert.
                         • Touchez-la une seconde fois : elle part d'elle-même sur sa fondation, ou vers l'unique destination possible.
                         • Vous pouvez aussi la faire glisser jusqu'au paquet visé.
+                        • Gardez le doigt posé sur une carte : elle s'affiche en grand, avec son nom écrit en toutes lettres. Relâchez pour refermer la loupe, ou glissez pour jouer la carte sans lever le doigt.
                         • Un liseré orange signale un coup obligatoire, un liseré bleu le conseil demandé, un liseré rose le dernier coup de l'adversaire.
                         • Le bouton du bas retourne une carte de votre talon et passe la main.
+                        • « Crapette ! » dénonce l'adversaire. À tort, cela se paie : voyez les réglages.
                         """
                     )
 

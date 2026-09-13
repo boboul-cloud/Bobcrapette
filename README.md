@@ -98,8 +98,8 @@ Pour signer avec un autre compte, remplacer `DEVELOPMENT_TEAM` dans
 | --- | --- |
 | `Bobcrapette/Model` | Le jeu, sans une ligne d'interface : cartes, variantes, position, **moteur de règles**, adversaire artificiel, conduite de la partie, sauvegarde. |
 | `Bobcrapette/Views` | Le rendu : cartes dessinées en vectoriel, plan du tapis, plateau, écrans de menu, de réglages et de règles. |
-| `BobcrapetteTests` | 45 tests : composition du jeu, fondations, colonnes, coups offensifs, obligations, déroulement d'un tour, adversaire, conduite de partie et plan du tapis. |
-| `BobcrapetteUITests` | 7 tests d'interface sur simulateur : tape pour choisir, tape pour jouer, glisser-déposer, avertissement de coup obligatoire, accès aux mentions légales. |
+| `BobcrapetteTests` | 51 tests : composition du jeu, fondations, colonnes, coups offensifs, obligations, déroulement d'un tour, adversaire, conduite de partie et plan du tapis. |
+| `BobcrapetteUITests` | 9 tests d'interface sur simulateur : tape pour choisir, tape pour jouer, glisser-déposer, loupe au maintien, bouton « Crapette ! » permanent, avertissement de coup obligatoire, accès aux mentions légales. |
 | `docs/` | Le site publié par GitHub Pages : présentation, confidentialité, conditions, assistance. |
 | `store/` | Le dossier de soumission App Store : fiche, captures aux formats exigés, étiquette de confidentialité, notes de revue, feuille de route. |
 | `Tools/MakeIcon.swift` | Génère l'icône de l'application en CoreGraphics. |
@@ -117,6 +117,12 @@ Quelques partis pris :
   s'animent sans code d'animation par carte.
 - **Une carte, un seul geste.** Tape et glissement sortent du même reconnaisseur,
   mesuré dans le repère fixe du tapis, jamais dans celui de la carte qui bouge.
+  La loupe s'y ajoute en parallèle : un maintien ouvre la carte en grand, et le
+  moindre départ de la carte la referme.
+- **Le cri de « Crapette ! » ne se souffle pas.** Le magasin sait que l'adversaire
+  a fauté, mais garde l'information pour lui : le bouton est toujours là, toujours
+  identique, et c'est au joueur de lire le tapis. Sans prix pour un cri à tort,
+  la meilleure tactique serait d'appuyer à chaque tour — d'où le réglage.
 - **Le moteur de règles est pur et sans état**, donc directement réutilisable par
   l'IA et testable sans interface.
 
