@@ -82,6 +82,9 @@ struct SettingsView: View {
 
                 Section {
                     LabeledContent("Version", value: Self.version)
+                    Link(destination: Self.siteURL) {
+                        Label("Site du jeu", systemImage: "globe")
+                    }
                     Link(destination: Self.privacy) {
                         Label("Politique de confidentialité", systemImage: "hand.raised")
                     }
@@ -124,6 +127,7 @@ struct SettingsView: View {
     // MARK: - Mentions
 
     private static let site = "https://boboul-cloud.github.io/Bobcrapette"
+    private static let siteURL = URL(string: site)!
     private static let privacy = URL(string: "\(site)/confidentialite.html")!
     private static let terms = URL(string: "\(site)/conditions.html")!
     private static let support = URL(string: "\(site)/assistance.html")!

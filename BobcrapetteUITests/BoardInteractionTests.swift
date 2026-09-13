@@ -116,6 +116,30 @@ final class BoardInteractionTests: XCTestCase {
         XCTAssertFalse(warning.exists, "L'avertissement aurait dû se refermer")
     }
 
+    func testLesMentionsSontAccessiblesDepuisLesReglages() {
+        waitForBoard()
+        app.buttons["Réglages"].tap()
+        XCTAssertTrue(app.buttons["Terminé"].waitForExistence(timeout: 15),
+                      "Les réglages ne se sont pas ouverts")
+
+        // La section « À propos » ferme la liste : SwiftUI ne construit ses
+        // lignes qu'une fois qu'elles approchent de l'écran.
+        let site = app.staticTexts["Site du jeu"]
+        var defilements = 0
+        while !site.exists && defilements < 10 {
+            app.swipeUp()
+            defilements += 1
+        }
+
+        XCTAssertTrue(site.exists, "Le lien vers le site manque dans les réglages")
+        XCTAssertTrue(app.staticTexts["Politique de confidentialité"].exists,
+                      "Le lien vers la politique de confidentialité manque")
+        XCTAssertTrue(app.staticTexts["Conditions d'utilisation"].exists,
+                      "Le lien vers les conditions manque")
+        XCTAssertTrue(app.staticTexts["Assistance"].exists,
+                      "Le lien vers l'assistance manque")
+    }
+
     func testUneCarteDeColonneSeChoisitAussi() {
         waitForBoard()
         let column = card("tableau-0")

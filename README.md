@@ -99,7 +99,7 @@ Pour signer avec un autre compte, remplacer `DEVELOPMENT_TEAM` dans
 | `Bobcrapette/Model` | Le jeu, sans une ligne d'interface : cartes, variantes, position, **moteur de règles**, adversaire artificiel, conduite de la partie, sauvegarde. |
 | `Bobcrapette/Views` | Le rendu : cartes dessinées en vectoriel, plan du tapis, plateau, écrans de menu, de réglages et de règles. |
 | `BobcrapetteTests` | 45 tests : composition du jeu, fondations, colonnes, coups offensifs, obligations, déroulement d'un tour, adversaire, conduite de partie et plan du tapis. |
-| `BobcrapetteUITests` | 6 tests d'interface sur simulateur : tape pour choisir, tape pour jouer, glisser-déposer, avertissement de coup obligatoire. |
+| `BobcrapetteUITests` | 7 tests d'interface sur simulateur : tape pour choisir, tape pour jouer, glisser-déposer, avertissement de coup obligatoire, accès aux mentions légales. |
 | `docs/` | Le site publié par GitHub Pages : présentation, confidentialité, conditions, assistance. |
 | `store/` | Le dossier de soumission App Store : fiche, captures aux formats exigés, étiquette de confidentialité, notes de revue, feuille de route. |
 | `Tools/MakeIcon.swift` | Génère l'icône de l'application en CoreGraphics. |
