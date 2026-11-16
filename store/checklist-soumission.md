@@ -3,6 +3,9 @@
 Ce qui est **fait**, ce qui **demande une décision**, et ce qui **reste à faire
 chez Apple**. Tout ce qui relève du dépôt est déjà en place.
 
+Pour la saisie elle-même, ouvrez `soumission-app-store.md` : tous les champs
+d'App Store Connect y figurent dans l'ordre des écrans, prêts à être recopiés.
+
 ---
 
 ## ✅ Fait dans le dépôt
@@ -39,6 +42,10 @@ chez Apple**. Tout ce qui relève du dépôt est déjà en place.
 - [ ] **Territoires.** Par défaut, le monde entier. L'interface étant en français,
       vous pouvez restreindre à la France, la Belgique, la Suisse, le Canada et le
       Luxembourg — ou laisser ouvert, le jeu se comprend aux couleurs des cartes.
+- [ ] **Statut de professionnel et adresse publique.** L'app n'est distribuée
+      dans l'Union européenne que si vous déclarez ce statut, et l'adresse
+      déclarée s'affiche alors sur la fiche. Le détail et les précautions sont
+      dans `soumission-app-store.md`, section 6.
 - [ ] **Compte développeur.** Le programme Apple Developer coûte 99 € par an et
       est obligatoire pour publier. Votre certificat actuel est un certificat de
       développement : il permet d'installer sur vos appareils, pas de soumettre.
@@ -49,8 +56,8 @@ chez Apple**. Tout ce qui relève du dépôt est déjà en place.
 
 1. **Créer la fiche** : *Mes apps ▸ +* → plateforme iOS, nom `Bobcrapette`,
    langue principale français (France), identifiant `com.oulhen.bobcrapette`.
-2. **Recopier** `fiche-app-store.md` : sous-titre, description, mots-clés, texte
-   promotionnel, nouveautés, catégories, URL.
+2. **Recopier** `soumission-app-store.md`, champ par champ : identité,
+   catégories, classification, description, mots-clés, liens, coordonnées.
 3. **Téléverser les captures** de `store/captures/`.
 4. **Répondre au questionnaire de classification** : tout à *Aucun*, et bien
    répondre **Non** aux jeux d'argent simulés → 4+.
@@ -79,8 +86,8 @@ xcodebuild build -scheme Bobcrapette -configuration Release \
 - [ ] Le numéro de version (`MARKETING_VERSION`) et le numéro de build
       (`CURRENT_PROJECT_VERSION`) sont à jour dans `project.yml`. Le numéro de
       build doit **augmenter à chaque envoi**, même pour corriger une broutille.
-- [ ] Les trois URL du site répondent bien (vérifier après l'activation de
-      GitHub Pages, qui prend quelques minutes).
+- [x] Les URL du site répondent : accueil, assistance, confidentialité et
+      conditions renvoient toutes un code 200 (vérifié le 13 septembre 2026).
 - [ ] L'application se lance sur un appareil réel et une partie va jusqu'au bout.
 
 ---
@@ -95,4 +102,4 @@ xcodebuild build -scheme Bobcrapette -configuration Release \
 | Pas de valeur ajoutée / simple gabarit | Moteur, IA et dessin des cartes écrits pour ce jeu ✅ |
 | Plantage au lancement | Testé sur iPhone, iPad, Mac et appareil réel ✅ |
 | Classification inadaptée | 4+, sans jeu d'argent simulé ✅ |
-| Liens morts dans la fiche | À revérifier une fois Pages en ligne ⚠️ |
+| Liens morts dans la fiche | Les quatre pages du site répondent ✅ |

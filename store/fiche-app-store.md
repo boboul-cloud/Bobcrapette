@@ -111,10 +111,13 @@ sans monnaie virtuelle et sans hasard rémunéré.
 ## Mots-clés (100, séparés par des virgules, sans espace)
 
 ```
-tarot,cartes,réussite,solitaire,patience,atout,deux joueurs,jeu de societe,hors ligne
+cartes,réussite,solitaire,patience,atout,deux,joueurs,societe,famille,solo,duel,hors,ligne
 ```
 
-Le nom et le sous-titre sont déjà indexés : inutile d'y répéter « crapette ».
+90 caractères. Le nom et le sous-titre sont déjà indexés : « crapette »,
+« tarot » et « jeu » n'ont rien à faire ici. Des mots isolés plutôt que des
+expressions, Apple recomposant lui-même les combinaisons — `societe` suffit à
+faire ressortir « jeu de société ».
 
 ---
 
