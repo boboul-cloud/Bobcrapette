@@ -59,6 +59,30 @@ final class BoardInteractionTests: XCTestCase {
         wait(for: [chosen], timeout: timeout)
     }
 
+    /// Tape une carte et attend qu'elle soit choisie.
+    ///
+    /// Sur une machine d'intégration lente, la première tape peut se perdre :
+    /// l'écran annonce déjà « À vous de jouer » alors que la carte n'accepte
+    /// pas encore les touches, ou la tape dure assez pour passer pour un appui
+    /// prolongé (la loupe). On attend donc que la carte soit atteignable, et
+    /// si elle n'est toujours pas choisie après quelques secondes, on retape
+    /// une seule fois. Retaper une carte déjà choisie la jouerait : on vérifie
+    /// d'abord qu'elle ne l'est pas.
+    private func choisir(_ element: XCUIElement, timeout: TimeInterval = 15) {
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"),
+                                                 object: element)
+        XCTAssertEqual(XCTWaiter().wait(for: [hittable], timeout: 10), .completed,
+                       "La carte n'est jamais devenue atteignable")
+        element.tap()
+
+        let firstTry = XCTNSPredicateExpectation(predicate: NSPredicate(format: "selected == true"),
+                                                 object: element)
+        if XCTWaiter().wait(for: [firstTry], timeout: 5) == .completed { return }
+
+        if !element.isSelected { element.tap() }
+        waitUntilSelected(element, timeout: timeout)
+    }
+
     /// Fait défiler la liste jusqu'à ce que le libellé apparaisse.
     private func descendreJusqua(_ label: String, _ message: String) {
         let element = app.staticTexts[label]
@@ -87,8 +111,7 @@ final class BoardInteractionTests: XCTestCase {
         let ace = card("crapette-south")
         XCTAssertFalse(ace.isSelected, "La carte ne devait pas être déjà choisie")
 
-        ace.tap()
-        waitUntilSelected(ace)
+        choisir(ace)
     }
 
     func testDeuxTapesEnvoientLAsSurSaFondation() {
@@ -97,8 +120,7 @@ final class BoardInteractionTests: XCTestCase {
                        "La fondation de cœur devait être vide au départ")
 
         let ace = card("crapette-south")
-        ace.tap()                 // choisit la carte
-        waitUntilSelected(ace)    // la deuxième tape n'a de sens qu'après
+        choisir(ace)              // la deuxième tape n'a de sens qu'après
         ace.tap()                 // la joue sur sa fondation
 
         XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 15),
@@ -165,8 +187,7 @@ final class BoardInteractionTests: XCTestCase {
 
         // Une fois un coup joué, le moment du cri est passé.
         let ace = card("crapette-south")
-        ace.tap()
-        waitUntilSelected(ace)
+        choisir(ace)
         ace.tap()
         XCTAssertTrue(card(heartsFoundation).waitForExistence(timeout: 15),
                       "L'As n'est pas monté sur sa fondation")
@@ -176,7 +197,6 @@ final class BoardInteractionTests: XCTestCase {
     func testUneCarteDeColonneSeChoisitAussi() {
         waitForBoard()
         let column = card("tableau-0")
-        column.tap()
-        waitUntilSelected(column)
+        choisir(column)
     }
 }
